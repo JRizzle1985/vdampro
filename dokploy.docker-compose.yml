@@ -1,0 +1,65 @@
+# Compose file for production deployment on Dokploy.
+
+volumes:
+  db_data: null
+  storage: null
+
+services:
+  app:
+    # Build from current repo instead of pulling official image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - storage:/var/lib/snipeit
+    # No "ports" section here to avoid host conflict. 
+    # Traefik handles external routing via labels.
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    env_file:
+      - .env
+    # Labels for Traefik routing (Dokploy usually manages these dynamically,
+    # but this structure is what you requested).
+    labels:
+      - traefik.docker.network=dokploy-network
+      # Note: The Host() rule and service names below are placeholders.
+      # Dokploy usually overwrites these labels when you deploy via its UI.
+      - traefik.http.routers.vdot-app.rule=Host(`vdot.your-domain.com`)
+      - traefik.http.routers.vdot-app.entrypoints=web
+      # Apache inside container listens on port 80
+      - traefik.http.services.vdot-app.loadbalancer.server.port=80
+      - traefik.http.routers.vdot-app.service=vdot-app
+      - traefik.http.routers.vdot-app.middlewares=redirect-to-https@file
+      - traefik.http.routers.vdot-app-secure.rule=Host(`vdot.your-domain.com`)
+      - traefik.http.routers.vdot-app-secure.entrypoints=websecure
+      - traefik.http.services.vdot-app-secure.loadbalancer.server.port=80
+      - traefik.http.routers.vdot-app-secure.service=vdot-app-secure
+      - traefik.enable=true
+    networks:
+      - dokploy-network
+
+  db:
+    image: mariadb:11.4.7
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      # https://mariadb.com/kb/en/using-healthcheck-sh/#compose-file-example
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 1s
+      retries: 5
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

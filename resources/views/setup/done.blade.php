@@ -19,7 +19,7 @@
     <div class="col-md-12">
 
         <p>
-            If you're already familiar with Snipe-IT, you can get started right away by <strong><a href="{{ config('app.url') }}">heading right to your dashboard</a></strong>, or if it's your first time using Snipe-IT, you can check out some of the useful resources below:
+            If you're already familiar with VDOT, you can get started right away by <strong><a href="{{ config('app.url') }}">heading right to your dashboard</a></strong>, or if it's your first time using VDOT, you can check out some of the useful resources below:
         </p>
         <div class="well well-sm">
             <div class="row">
@@ -53,7 +53,7 @@
 
             <p>
                 If you plan on using SCIM or LDAP syncing to keep your user lists up to date with your directory services,
-                make sure the username format for any users imported via CSV matches your directory service username format to avoid duplicating users in Snipe-IT.
+                make sure the username format for any users imported via CSV matches your directory service username format to avoid duplicating users in VDOT.
             </p>
         </div>
 

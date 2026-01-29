@@ -229,7 +229,7 @@
                   <strong>VDOT {{ trans('general.version') }}</strong> {{ config('version.app_version') }}<br>
                   Build {{ config('version.build_version') }} ({{ config('version.branch') }})<br>
                   <small class="text-muted">
-                    Powered by VDOT. <a href="https://github.com/grokability/snipe-it" target="_blank">Based on Snipe-IT</a>.
+                    VDOT powered by <a href="https://github.com/grokability/snipe-it" target="_blank">Snipe-IT</a>.
                     Licensed under <a href="https://github.com/grokability/snipe-it/blob/master/LICENSE" target="_blank">AGPLv3</a>.
                   </small>
               </div>

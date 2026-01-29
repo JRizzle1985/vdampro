@@ -80,7 +80,7 @@
           <div class="container">
               <div class="row">
                   <div class="col-lg-10 col-lg-offset-1">
-            <h1 class="page-header">VDOT {{ trans('general.pre_flight') }}</h1>
+            <h1 class="page-header">VDOT Pre-Flight</h1>
           </div>
                   <div class="col-lg-12">
 
@@ -138,7 +138,7 @@
                         </div>
                     </div>
 
-                      <strong>Snipe-IT {{ trans('general.version') }}</strong> {{ config('version.app_version') }} -
+                      <strong>VDOT {{ trans('general.version') }}</strong> {{ config('version.app_version') }} -
                       {{ trans('general.build') }} {{ config('version.build_version') }} ({{ config('version.branch') }})
 
                   </div>

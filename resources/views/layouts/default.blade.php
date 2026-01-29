@@ -1817,6 +1817,11 @@
                             &nbsp; VDOT {{ trans('general.version') }} {{ config('version.app_version') }} -
                             {{ trans('general.build') }} {{ config('version.build_version') }} ({{ config('version.branch') }})
                         @endif
+                        <br>
+                        <small class="text-muted" style="font-size: 10px;">
+                            Powered by VDOT. <a href="https://github.com/grokability/snipe-it" target="_blank" class="text-muted">Based on Snipe-IT</a>.
+                            Licensed under <a href="https://github.com/grokability/snipe-it/blob/master/LICENSE" target="_blank" class="text-muted">AGPLv3</a>.
+                        </small>
                     @endif
 
                     @if (isset($user) && ($user->isSuperUser()) && (app()->environment('local')))

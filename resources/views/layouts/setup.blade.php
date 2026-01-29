@@ -4,7 +4,7 @@
     <head>
       <title>
         @section('title')
-         Snipe-IT {{ trans('general.setup') }}
+         VDOT {{ trans('general.setup') }}
         @show
       </title>
         <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
@@ -80,8 +80,8 @@
           <div class="container">
               <div class="row">
                   <div class="col-lg-10 col-lg-offset-1">
-                    <h1 class="page-header"><img src="../img/logo.png" style="height: 65px;" alt="Snipe-IT logo"> {{ trans('general.pre_flight') }}</h1>
-                  </div>
+            <h1 class="page-header">VDOT {{ trans('general.pre_flight') }}</h1>
+          </div>
                   <div class="col-lg-12">
 
                     <div class="row bs-wizard" style="border-bottom:0;">

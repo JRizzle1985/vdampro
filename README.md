@@ -1,3 +1,35 @@
+## VDAMPro (Veridot Asset Management Pro)
+
+Veridot Asset Management Pro (VDAMPro) is a fork of [Snipe-IT](https://github.com/grokability/snipe-it) maintained for Veridot-specific enhancements and deployments.
+
+- Upstream project: https://github.com/grokability/snipe-it
+- License: GNU AGPLv3 (see [LICENSE](LICENSE))
+- Default branch: `master`
+
+### Upstream Sync
+
+Keep this fork up-to-date with upstream security patches and new features:
+
+```bash
+git fetch upstream
+git checkout master
+git merge upstream/master
+git push origin master
+```
+
+If a merge conflict occurs, resolve files manually, then:
+
+```bash
+git add -A
+git commit
+git push origin master
+```
+
+### Veridot Features
+
+- (planned) Add Veridot-specific workflows and reporting
+- (planned) Branding and deployment hardening
+
 ![snipe-it-by-grok](https://github.com/grokability/snipe-it/assets/197404/b515673b-c7c8-4d9a-80f5-9fa58829a602)
 
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/804dd1beb14a41f38810ab77d64fc4fc)](https://app.codacy.com/gh/grokability/snipe-it/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Tests](https://github.com/grokability/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/grokability/snipe-it/actions/workflows/tests.yml)

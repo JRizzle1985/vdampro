@@ -4,6 +4,8 @@
 .env.testing
 phpstan.neon
 .idea
+.trae/
+.continue/
 /bin/
 /bootstrap/compiled.php
 /node_modules

@@ -46,7 +46,8 @@
 }
 
 .input-group .input-group-addon {
-  background-color: #f4f4f4;
+  background-color: var(--input-group-bg);
+  color: var(--input-group-fg);
 }
 
 a.accordion-header {
@@ -324,7 +325,133 @@ body {
   "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
   "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-fg);
+  background: var(--color-bg);
+}
+
+.content-wrapper,
+.right-side {
+  background: var(--color-bg);
+}
+
+.content-header {
+  padding: 18px 24px 0;
+}
+
+.content {
+  padding: 18px 24px 24px;
+}
+
+.box,
+.small-box {
+  background: var(--box-bg);
+  border: 1px solid var(--box-header-bottom-border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.box-header {
+  padding: 14px 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.box-body {
+  padding: 16px;
+}
+
+.box-footer {
+  padding: 12px 16px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.btn:focus,
+.btn:active:focus {
+  outline: none;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(60, 141, 188, 0.25);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--link-color) 25%, transparent);
+}
+
+.form-control {
+  background: var(--box-bg);
+  border: 1px solid var(--table-border-row-color);
+  border-radius: 10px;
+  box-shadow: none;
+  color: var(--color-fg);
+  height: 38px;
+  padding: 8px 12px;
+}
+
+.form-control:focus {
+  border-color: #5fa4cc;
+  border-color: color-mix(in srgb, var(--link-color) 45%, var(--table-border-row-color));
+  box-shadow: 0 0 0 3px rgba(60, 141, 188, 0.2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--link-color) 20%, transparent);
+}
+
+.input-group .input-group-addon {
+  border: 1px solid var(--table-border-row-color);
+}
+
+.input-group .input-group-addon:first-child {
+  border-right: 0;
+}
+
+.input-group .input-group-addon:last-child {
+  border-left: 0;
+}
+
+.input-group .form-control:first-child {
+  border-right: 0;
+}
+
+.input-group .form-control:last-child {
+  border-left: 0;
+}
+
+.table > thead > tr > th {
+  border-bottom: var(--table-border-row);
+  color: var(--header-color);
+  font-weight: 600;
+  padding: 10px 12px;
+}
+
+.table > tbody > tr > td {
+  border-top: var(--table-border-row);
+  padding: 10px 12px;
+  vertical-align: middle;
+}
+
+.table-hover > tbody > tr:hover {
+  background: var(--table-stripe-bg-alt);
+}
+
+.sidebar-menu > li > a {
+  border-radius: 8px;
+  margin: 2px 8px;
+  padding: 10px 12px;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.sidebar-menu > li.active > a {
+  background: color-mix(in srgb, var(--main-theme-color) 20%, transparent);
+}
+
+.sidebar-menu > li > a:hover {
+  background: color-mix(in srgb, var(--main-theme-color) 14%, transparent);
 }
 
 .sidebar-menu {

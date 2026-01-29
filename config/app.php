@@ -244,7 +244,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Normal users will never need to edit this. This option lets you run a
-    | version of Snipe-IT with limited functionality to prevent demo abuse.
+    | version of VDOT with limited functionality to prevent demo abuse.
     |
     */
 

@@ -108,7 +108,7 @@ Create a User ::
         @if ($start_settings['prod'])
           Your app is set to production mode. Rock on!
         @else
-          Your app is set <code>{{ $start_settings['env'] }}</code> instead of <code>production</code> mode. If you're not planning on developing on Snipe-IT, please update your <code>APP_ENV</code> settings in your  <code>.env</code> file to <code>production</code>.
+          Your app is set <code>{{ $start_settings['env'] }}</code> instead of <code>production</code> mode. If you're not planning on developing on VDOT, please update your <code>APP_ENV</code> settings in your  <code>.env</code> file to <code>production</code>.
         @endif
       </td>
     </tr>

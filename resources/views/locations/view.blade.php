@@ -12,7 +12,7 @@
 {{-- Page content --}}
 @section('content')
     <x-container columns="2">
-        <x-page-column class="col-md-9">
+        <x-page-column class="col-md-9 col-xs-7">
           <x-tabs>
 
               <x-slot:tabnav>
@@ -378,7 +378,7 @@
       </x-tabs>
 
         </x-page-column>
-        <x-page-column class="col-md-3">
+        <x-page-column class="col-md-3 col-xs-5">
 
       @if ($location->image!='')
           <div class="col-md-12 text-center" style="padding-bottom: 17px;">

@@ -22,7 +22,7 @@
 @section('content')
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-9 col-xs-7">
 
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs hidden-print">
@@ -266,7 +266,7 @@
     </div><!--/.col-md-9-->
 
       <!-- side address column -->
-      <div class="col-md-3">
+      <div class="col-md-3 col-xs-5">
 
 
       @if (($supplier->address!='') && ($supplier->state!='') && ($supplier->country!='') && (config('services.google.maps_api_key')))

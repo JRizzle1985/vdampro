@@ -433,10 +433,10 @@
 
                                     @if ($asset->asset_tag)
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>{{ trans('admin/hardware/form.tag') }}</strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 <x-copy-to-clipboard copy_what="assettag">{{ $asset->asset_tag  }}</x-copy-to-clipboard>
                                             </div>
                                         </div>
@@ -445,10 +445,10 @@
 
                                     @if ($asset->deleted_at!='')
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <span class="text-danger"><strong>{{ trans('general.deleted') }}</strong></span>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->deleted_at, 'date', false) }}
 
                                             </div>
@@ -460,10 +460,10 @@
                                     @if ($asset->assetstatus)
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>{{ trans('general.status') }}</strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                                     <x-icon type="circle-solid" class="text-blue" />
                                                     {{ $asset->assetstatus->name }}
@@ -493,10 +493,10 @@
 
                                     @if ($asset->company)
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>{{ trans('general.company') }}</strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {!!  $asset->company->present()->formattedNameLink !!}
                                             </div>
                                         </div>
@@ -504,10 +504,10 @@
 
                                     @if ($asset->name)
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>{{ trans('admin/hardware/form.name') }}</strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 <x-copy-to-clipboard copy_what="assetname">
                                                     {{ $asset->name }}
                                                 </x-copy-to-clipboard>
@@ -518,10 +518,10 @@
 
                                     @if ($asset->serial)
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>{{ trans('admin/hardware/form.serial') }}</strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 <x-copy-to-clipboard copy_what="serial">
                                                     {{ $asset->serial  }}
                                                 </x-copy-to-clipboard>
@@ -531,12 +531,12 @@
 
                                     @if ($asset->last_checkout!='')
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('admin/hardware/table.checkout_date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
                                             </div>
                                         </div>
@@ -544,12 +544,12 @@
 
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('general.last_audit') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {!! $asset->checkInvalidNextAuditDate() ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
                                                 {{ Helper::getFormattedDateObject($audit_log->created_at, 'datetime', false) }}
                                                 @if ($audit_log->user)
@@ -562,12 +562,12 @@
 
                                     @if ($asset->next_audit_date)
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('general.next_audit_date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {!! $asset->checkInvalidNextAuditDate() ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
                                                 {{ Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
                                             </div>
@@ -576,12 +576,12 @@
 
                                     @if (($asset->model) && ($asset->model->manufacturer))
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.manufacturer') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 <ul class="list-unstyled">
 
                                                     <li>
@@ -643,12 +643,12 @@
                                     @endif
 
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 col-xs-5">
                                             <strong>
                                                 {{ trans('general.category') }}
                                             </strong>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-9 col-xs-7">
                                             @if (($asset->model) && ($asset->model->category))
                                                 <x-copy-to-clipboard copy_what="category">{!!  $asset->model->category->present()->formattedNameLink !!}</x-copy-to-clipboard>
                                             @else
@@ -659,12 +659,12 @@
 
                                     @if ($asset->model)
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.model') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 @if ($asset->model)
                                                     <x-copy-to-clipboard copy_what="model">{!!  $asset->model->present()->formattedNameLink !!}</x-copy-to-clipboard>
 
@@ -674,12 +674,12 @@
                                     @endif
 
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 col-xs-5">
                                             <strong>
                                                 {{ trans('admin/models/table.modelnumber') }}
                                             </strong>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-9 col-xs-7">
                                             @if (($asset->model) && ($asset->model->model_number!=''))
                                                 <x-copy-to-clipboard copy_what="model_number">{{ ($asset->model) ? $asset->model->model_number : ''}}</x-copy-to-clipboard>
                                             @endif
@@ -688,20 +688,20 @@
 
                                     <!-- byod -->
                                     <div class="row byod">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 col-xs-5">
                                             <strong>{{ trans('general.byod') }}</strong>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-9 col-xs-7">
                                             {!! ($asset->byod=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                                         </div>
                                     </div>
 
                                     <!-- requestable -->
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 col-xs-5">
                                             <strong>{{ trans('admin/hardware/general.requestable') }}</strong>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-9 col-xs-7">
                                             {!! ($asset->requestable=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                                         </div>
                                     </div>
@@ -709,12 +709,12 @@
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ $field->name }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
+                                                <div class="col-md-9 col-xs-7{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
 
                                                     @if (!empty($asset->{$field->db_column_name()}))
                                                         <x-copy-to-clipboard copy_what="{{ $field->id }}">
@@ -787,12 +787,12 @@
 
                                         @if ($asset->purchase_date)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.date') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
                                                     -
                                                     {{ Carbon::parse($asset->purchase_date)->diffForHumans(['parts' => 3]) }}
@@ -803,12 +803,12 @@
 
                                         @if ($asset->purchase_cost)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.cost') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="purchase_cost">
                                                         @if (($asset->id) && ($asset->location))
                                                             {{ $asset->location->currency }}
@@ -825,12 +825,12 @@
                                         @endif
                                         @if(($asset->components->count() > 0) && ($asset->purchase_cost))
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/table.components_cost') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="component_cost">
                                                         @if (($asset->id) && ($asset->location))
                                                             {{ $asset->location->currency }}
@@ -846,12 +846,12 @@
                                         @endif
                                         @if (($asset->model) && ($asset->depreciation) && ($asset->purchase_date))
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/table.current_value') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="current_value">
                                                         @if (($asset->id) && ($asset->location))
                                                             {{ $asset->location->currency }}
@@ -869,12 +869,12 @@
                                         @endif
                                         @if ($asset->order_number)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.order_number') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="order_number"><a href="{{ route('hardware.index', ['order_number' => $asset->order_number]) }}">{{ $asset->order_number }}</a></x-copy-to-clipboard>
                                                 </div>
                                             </div>
@@ -882,12 +882,12 @@
 
                                         @if ($asset->supplier)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.supplier') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="supplier">{!!  $asset->supplier->present()->formattedNameLink !!}</x-copy-to-clipboard>
                                                 </div>
                                             </div>
@@ -896,12 +896,12 @@
 
                                         @if ($asset->warranty_months)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.warranty') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ trans_choice('general.months_plural', $asset->warranty_months) }}
                                                     @if (($asset->model) && ($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                         <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
@@ -913,14 +913,14 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.warranty_expires') }}
 
 
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     @if ($asset->purchase_date)
                                                         {{ Helper::getFormattedDateObject($asset->present()->warranty_expires(), 'date', false) }}
                                                         -
@@ -939,23 +939,23 @@
 
                                         @if (($asset->model) && ($asset->depreciation))
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.depreciation') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ $asset->depreciation->name }}
                                                     ({{ trans_choice('general.months_plural', $asset->depreciation->months) }})
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.fully_depreciated') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     @if ($asset->purchase_date)
                                                         {{ Helper::getFormattedDateObject($asset->depreciated_date()->format('Y-m-d'), 'date', false) }}
                                                         -
@@ -970,12 +970,12 @@
 
                                         @if (($asset->asset_eol_date) && ($asset->purchase_date))
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.eol_rate') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true) }}
                                                     {{ trans('admin/hardware/form.months') }}
 
@@ -984,7 +984,7 @@
                                         @endif
                                         @if ($asset->asset_eol_date)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.eol_date') }}
                                                         @if ($asset->purchase_date)
@@ -992,7 +992,7 @@
                                                         @endif
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     @if ($asset->asset_eol_date)
                                                         {{ Helper::getFormattedDateObject($asset->asset_eol_date, 'date', false) }}
                                                         -
@@ -1014,24 +1014,24 @@
 
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.notes') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {!! nl2br(Helper::parseEscapedMarkedownInline($asset->notes)) !!}
                                             </div>
                                         </div>
 
                                         @if ($asset->location)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.location') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="location">
                                                         @can('superuser')
                                                             <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
@@ -1047,12 +1047,12 @@
 
                                         @if ($asset->defaultLoc)
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.default_location') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     <x-copy-to-clipboard copy_what="default_location">
                                                         @can('superuser')
                                                             <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
@@ -1068,12 +1068,12 @@
 
                                         @if ($asset->created_at!='')
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.created_at') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
                                                 </div>
                                             </div>
@@ -1081,12 +1081,12 @@
 
                                         @if ($asset->updated_at!='')
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.updated_at') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
                                                 </div>
                                             </div>
@@ -1094,24 +1094,24 @@
 
                                         @if ($asset->expected_checkin!='')
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('general.expected_checkin') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                                                 </div>
                                             </div>
                                         @endif
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {!! trans('general.first_checkout') !!}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {{ Helper::getFormattedDateObject($asset->first_checkout_at, 'datetime')['formatted'] ?? '' }}
                                             </div>
                                         </div>
@@ -1119,12 +1119,12 @@
 
                                         @if ($asset->last_checkin!='')
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-xs-5">
                                                     <strong>
                                                         {{ trans('admin/hardware/table.last_checkin_date') }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-9 col-xs-7">
                                                     {{ Helper::getFormattedDateObject($asset->last_checkin, 'datetime', false) }}
                                                 </div>
                                             </div>
@@ -1133,36 +1133,36 @@
 
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('general.checkouts_count') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {{ ($asset->checkouts) ? (int) $asset->checkouts->count() : '0' }}
                                             </div>
                                         </div>
 
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('general.checkins_count') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {{ ($asset->checkins) ? (int) $asset->checkins->count() : '0' }}
                                             </div>
                                         </div>
 
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-xs-5">
                                                 <strong>
                                                     {{ trans('general.user_requests_count') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-xs-7">
                                                 {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
                                             </div>
                                         </div>
@@ -1177,6 +1177,7 @@
                             <div class="row{{($asset->licenses->count() > 0 ) ? '' : ' hidden-print'}}">
                                 <div class="col-md-12">
                                     <!-- Licenses assets table -->
+                                    <div class="table-responsive">
                                         <table class="table">
                                             <thead>
                                             <tr>
@@ -1209,6 +1210,7 @@
                                             @endforeach
                                             </tbody>
                                         </table>
+                                    </div>
                                 </div><!-- /col -->
                             </div> <!-- row -->
                         </div> <!-- /.tab-pane software -->
@@ -1218,6 +1220,7 @@
                             <div class="row{{($asset->components->count() > 0 ) ? '' : ' hidden-print'}}">
                                 <div class="col-md-12">
 
+                                    <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
                                             <th>{{ trans('general.name') }}</th>
@@ -1262,6 +1265,7 @@
                                             </tr>
                                             </tfoot>
                                         </table>
+                                    </div>
                                 </div>
                             </div>
                         </div> <!-- /.tab-pane components -->

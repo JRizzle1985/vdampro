@@ -30,7 +30,7 @@
               <th class="col-md-1"><span class="sr-only">{{ trans('admin/custom_fields/general.reorder') }}</span></th>
               @endcan
               <th class="col-md-1" style="display: none;">{{ trans('admin/custom_fields/general.order') }}</th>
-              <th class="col-md-3">{{ trans('admin/custom_fields/general.field_name') }}</th>
+              <th class="col-md-3 col-xs-5">{{ trans('admin/custom_fields/general.field_name') }}</th>
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_element') }}</th>
               <th class="col-md-1">{{ trans('admin/custom_fields/general.encrypted') }}</th>

@@ -10,7 +10,7 @@
 {{-- Page content --}}
 @section('content')
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-9 col-xs-7">
 
       <!-- Custom Tabs -->
       <div class="nav-tabs-custom">
@@ -85,10 +85,10 @@
 
                   @if (!is_null($license->company))
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('general.company') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $license->company->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -96,10 +96,10 @@
 
                   @if ($license->manufacturer)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('admin/hardware/form.manufacturer') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $license->manufacturer->present()->formattedNameLink !!}
 
                         @if ($license->manufacturer->url)
@@ -126,10 +126,10 @@
 
                   @if (!is_null($license->serial))
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('admin/licenses/form.license_key') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @can('viewKeys', $license)
 
                           <code>
@@ -147,10 +147,10 @@
 
                   @if ($license->category)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('general.category') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         <a href="{{ route('categories.show', $license->category->id) }}">{{ $license->category->name }}</a>
                       </div>
                     </div>
@@ -159,10 +159,10 @@
 
                   @if ($license->license_name!='')
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('admin/licenses/form.to_name') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $license->license_name }}
                       </div>
                     </div>
@@ -170,12 +170,12 @@
 
                   @if ($license->license_email!='')
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/licenses/form.to_email') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $license->license_email }}
                       </div>
                     </div>
@@ -185,10 +185,10 @@
                   @if ($license->supplier)
 
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('general.supplier') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @if ($license->supplier->deleted_at=='')
                               {!!  $license->supplier->present()->formattedNameLink !!}
 
@@ -233,12 +233,12 @@
 
                   @if (isset($license->expiration_date))
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/licenses/form.expiration') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @if ($license->isExpired())
                           <span class="text-danger">
                            <x-icon type="warning" class="text-warning" />
@@ -251,12 +251,12 @@
 
                   @if ($license->termination_date)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/licenses/form.termination_date') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @if ($license->isTerminated())
                           <span class="text-danger">
                            <x-icon type="warning" class="text-warning" />
@@ -271,12 +271,12 @@
 
                   @if ($license->depreciation)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/hardware/form.depreciation') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $license->depreciation->name }}
                         ({{ $license->depreciation->months }}
                         {{ trans('admin/hardware/form.months') }}
@@ -285,24 +285,24 @@
                     </div>
 
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/hardware/form.depreciates_on') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
                       </div>
                     </div>
 
 
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/hardware/form.fully_depreciated') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @if ($license->time_until_depreciated())
                           @if ($license->time_until_depreciated()->y > 0)
                             {{ $license->time_until_depreciated()->y }}
@@ -317,12 +317,12 @@
 
                   @if ($license->purchase_order)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/licenses/form.purchase_order') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $license->purchase_order }}
                       </div>
                     </div>
@@ -331,10 +331,10 @@
 
                   @if (isset($license->purchase_date))
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>{{ trans('general.purchase_date') }}</strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
 
                       </div>
@@ -343,12 +343,12 @@
 
                   @if ($license->purchase_cost > 0)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('general.purchase_cost') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $snipeSettings->default_currency }}
                         {{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                       </div>
@@ -357,36 +357,36 @@
 
                   @if ($license->order_number)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('general.order_number') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $license->order_number }}
                       </div>
                     </div>
                   @endif
 
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-5">
                       <strong>
                         {{ trans('admin/licenses/form.maintained') }}
                       </strong>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-xs-7">
                       {!! $license->maintained ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 
                   @if (($license->seats) && ($license->seats) > 0)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('admin/licenses/form.seats') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
 
                         @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
                           <span data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold', ['remaining_count' => $license->remaincount(), 'min_amt' => $license->min_amt]) }}"><i class="fas fa-exclamation-triangle text-danger" aria-hidden="true"></i>
@@ -405,12 +405,12 @@
 
 
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-5">
                       <strong>
                         {{ trans('admin/licenses/form.reassignable') }}
                       </strong>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-xs-7">
                       {!! $license->reassignable ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
@@ -418,12 +418,12 @@
 
                   @if ($license->notes)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         <strong>
                           {{ trans('general.notes') }}
                         </strong>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {!! nl2br(Helper::parseEscapedMarkedownInline($license->notes)) !!}
                       </div>
                     </div>
@@ -521,7 +521,7 @@
 
       </div> <!-- nav-tabs-custom -->
     </div>  <!-- /.col -->
-    <div class="col-md-3">
+    <div class="col-md-3 col-xs-5">
 
       @can('update', $license)
         <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-warning btn-sm btn-social btn-block hidden-print" style="margin-bottom: 5px;">

@@ -332,10 +332,10 @@
                     <!-- name -->
 
     
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/table.name') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $user->first_name }} {{ $user->last_name }}
                       </div>
 
@@ -346,10 +346,10 @@
                     <!-- username -->
                     <div class="row">
 
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/table.username') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
 
                         @if ($user->isSuperUser())
                           <span class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}"><x-icon type="superadmin" title="{{ trans('general.superuser') }}" /></span>&nbsp;
@@ -366,10 +366,10 @@
                    @if ($user->display_name)
                    <div class="row">
 
-                       <div class="col-md-3">
+                       <div class="col-md-3 col-xs-5">
                            {{ trans('admin/users/table.display_name') }}
                        </div>
-                       <div class="col-md-9">
+                       <div class="col-md-9 col-xs-7">
                            {{ $user->getRawOriginal('display_name') }}
                        </div>
                    </div>
@@ -378,10 +378,10 @@
                     <!-- address -->
                     @if (($user->address) || ($user->city) || ($user->state) || ($user->country))
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.address') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
 
                           @if ($user->address)
                           {{ $user->address }} <br>
@@ -407,10 +407,10 @@
                    @if (!is_null($user->company))
                        <div class="row">
 
-                           <div class="col-md-3">
+                           <div class="col-md-3 col-xs-5">
                                {{ trans('general.company') }}
                            </div>
-                           <div class="col-md-9">
+                           <div class="col-md-9 col-xs-7">
                                {!!  $user->company->present()->formattedNameLink !!}
                            </div>
 
@@ -420,10 +420,10 @@
 
                      <!-- groups -->
                      <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-5">
                           {{ trans('general.groups') }}
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-xs-7">
                           @if ($user->groups->count() > 0)
                             @foreach ($user->groups as $group)
                               @can('superadmin')
@@ -445,10 +445,10 @@
                    <!-- start date -->
                    @if ($user->start_date)
                        <div class="row">
-                           <div class="col-md-3">
+                           <div class="col-md-3 col-xs-5">
                                {{ trans('general.start_date') }}
                            </div>
-                           <div class="col-md-9">
+                           <div class="col-md-9 col-xs-7">
                                {{ \App\Helpers\Helper::getFormattedDateObject($user->start_date, 'date', false) }}
                            </div>
                        </div>
@@ -457,10 +457,10 @@
                    <!-- end date -->
                    @if ($user->end_date)
                        <div class="row">
-                           <div class="col-md-3">
+                           <div class="col-md-3 col-xs-5">
                                {{ trans('general.end_date') }}
                            </div>
-                           <div class="col-md-9">
+                           <div class="col-md-9 col-xs-7">
                                {{ \App\Helpers\Helper::getFormattedDateObject($user->end_date, 'date', false) }}
                            </div>
                        </div>
@@ -470,10 +470,10 @@
                      <!-- jobtitle -->
                      <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-5">
                           {{ trans('admin/users/table.job') }}
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-xs-7">
                           {{ $user->jobtitle }}
                         </div>
 
@@ -484,10 +484,10 @@
                       <!-- employee_num -->
                       <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-5">
                           {{ trans('admin/users/table.employee_num') }}
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-xs-7">
                           {{ $user->employee_num }}
                         </div>
 
@@ -498,10 +498,10 @@
                       <!-- manager -->
                       <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-5">
                           {{ trans('admin/users/table.manager') }}
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-xs-7">
                           <a href="{{ route('users.show', $user->manager->id) }}">
                             {{ $user->manager->display_name }}
                           </a>
@@ -515,10 +515,10 @@
                     @if ($user->email)
                     <!-- email -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/table.email') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         <a href="mailto:{{ $user->email }}" data-tooltip="true" title="{{ trans('general.send_email') }}">
                             <x-icon type="email" />
                             {{ $user->email }}</a>
@@ -529,10 +529,10 @@
                     @if ($user->website)
                      <!-- website -->
                      <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.website') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           <a href="{{ $user->website }}" target="_blank"><x-icon type="external-link" /> {{ $user->website }}</a>
                       </div>
                     </div>
@@ -541,10 +541,10 @@
                     @if ($user->phone)
                       <!-- phone -->
                       <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-5">
                           {{ trans('admin/users/table.phone') }}
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-xs-7">
                           <a href="tel:{{ $user->phone }}" data-tooltip="true" title="{{ trans('general.call') }}">
                               <x-icon type="phone" />
                               {{ $user->phone }}</a>
@@ -555,10 +555,10 @@
                    @if ($user->mobile)
                        <!-- phone -->
                        <div class="row">
-                           <div class="col-md-3">
+                           <div class="col-md-3 col-xs-5">
                                {{ trans('admin/users/table.mobile') }}
                            </div>
-                           <div class="col-md-9">
+                           <div class="col-md-9 col-xs-7">
                                <a href="tel:{{ $user->mobile }}" data-tooltip="true" title="{{ trans('general.call') }}">
                                    <x-icon type="mobile" />
                                    {{ $user->mobile }}</a>
@@ -568,10 +568,10 @@
                     @if ($user->userloc)
                      <!-- location -->
                      <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/table.location') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $user->userloc->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -581,10 +581,10 @@
                     @if ($user->department)
                       <!-- empty -->
                       <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-5">
                           {{ trans('general.department') }}
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-xs-7">
                           <a href="{{ route('departments.show', $user->department) }}">
                               {!!  $user->department->present()->formattedNameLink !!}
                           </a>
@@ -592,10 +592,10 @@
                       </div>
                       @if($user->department->manager)
                         <div class="row">
-                          <div class="col-md-3">
+                          <div class="col-md-3 col-xs-5">
                             {{ trans('admin/users/general.department_manager') }}
                           </div>
-                          <div class="col-md-9">
+                          <div class="col-md-9 col-xs-7">
                             <a href="{{ route('users.show', $user->department->manager) }}">
                               {{ $user->department->manager->full_name }}
                             </a>
@@ -607,10 +607,10 @@
 
                    <!-- last login -->
                    <div class="row">
-                       <div class="col-md-3">
+                       <div class="col-md-3 col-xs-5">
                            {{ trans('general.last_login') }}
                        </div>
-                       <div class="col-md-9">
+                       <div class="col-md-9 col-xs-7">
                            {{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}
                        </div>
                    </div>
@@ -618,10 +618,10 @@
                     @if ($user->created_at)
                     <!-- created at -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.created_at') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted']}}
 
                           @if ($user->createdBy)
@@ -640,10 +640,10 @@
 
                     <!-- vip -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/general.vip_label') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           @if ($user->vip=='1')
                               <x-icon type="checkmark" class="fa-fw text-success" />
                               {{ trans('general.yes') }}
@@ -656,10 +656,10 @@
 
                     <!-- remote -->
                      <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/general.remote') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           @if ($user->remote == '1')
                               <x-icon type="checkmark" class="fa-fw text-success" />
                               {{ trans('general.yes') }}
@@ -672,10 +672,10 @@
 
                     <!-- login enabled -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.login_enabled') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           @if ($user->activated == '1')
                               <x-icon type="checkmark" class="fa-fw text-success" />
                               {{ trans('general.yes') }}
@@ -688,10 +688,10 @@
 
                    <!-- auto assign license -->
                    <div class="row">
-                       <div class="col-md-3">
+                       <div class="col-md-3 col-xs-5">
                            {{ trans('general.autoassign_licenses') }}
                        </div>
-                       <div class="col-md-9">
+                       <div class="col-md-9 col-xs-7">
                            @if ($user->autoassign_licenses == '1')
                                <x-icon type="checkmark" class="fa-fw text-success" />
                                {{ trans('general.yes') }}
@@ -705,10 +705,10 @@
 
                    <!-- LDAP -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                           LDAP
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           @if ($user->ldap_import == '1')
                               <x-icon type="checkmark" class="fa-fw text-success" />
                               {{ trans('general.yes') }}
@@ -724,10 +724,10 @@
 
                           <!-- 2FA active -->
                           <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-5">
                               {{ trans('admin/users/general.two_factor_active') }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-xs-7">
 
                                 @if ($user->two_factor_active())
                                     <x-icon type="checkmark" class="fa-fw text-success" />
@@ -742,10 +742,10 @@
 
                           <!-- 2FA enrolled -->
                           <div class="row two_factor_resetrow">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-5">
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
-                            <div class="col-md-9" id="two_factor_reset_toggle">
+                            <div class="col-md-9 col-xs-7" id="two_factor_reset_toggle">
                                 @if ($user->two_factor_active_and_enrolled())
                                 <x-icon type="checkmark" class="fa-fw text-success" />
                                 {{ trans('general.yes') }}
@@ -761,10 +761,10 @@
 
                             <!-- 2FA reset -->
                             <div class="row">
-                              <div class="col-md-3">
+                              <div class="col-md-3 col-xs-5">
 
                               </div>
-                              <div class="col-md-9">
+                              <div class="col-md-9 col-xs-7">
 
                                 <a class="btn btn-default btn-sm" id="two_factor_reset" style="margin-right: 10px; margin-top: 10px;">
                                   {{ trans('admin/settings/general.two_factor_reset') }}
@@ -792,10 +792,10 @@
                      <!-- empty -->
                      <div class="row">
 
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/table.notes') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!! nl2br(Helper::parseEscapedMarkedownInline($user->notes)) !!}
                       </div>
 
@@ -803,10 +803,10 @@
                     @endif
                    @if($user->getUserTotalCost()->total_user_cost > 0)
                    <div class="row">
-                       <div class="col-md-3">
+                       <div class="col-md-3 col-xs-5">
                            {{ trans('admin/users/table.total_assets_cost') }}
                        </div>
-                       <div class="col-md-9">
+                       <div class="col-md-9 col-xs-7">
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
@@ -815,8 +815,8 @@
                            </a>
                        </div>
                            <div id="optional_details" class="col-md-12" style="display:none">
-                               <div class="col-md-3" style="border-top:none;"></div>
-                               <div class="col-md-9" style="border-top:none;">
+                               <div class="col-md-3 col-xs-5" style="border-top:none;"></div>
+                               <div class="col-md-9 col-xs-7" style="border-top:none;">
                                {{trans('general.assets').': '. Helper::formatCurrencyOutput($user->getUserTotalCost()->asset_cost)}}<br>
                                {{trans('general.licenses').': '. Helper::formatCurrencyOutput($user->getUserTotalCost()->license_cost)}}<br>
                                {{trans('general.accessories').': '.Helper::formatCurrencyOutput($user->getUserTotalCost()->accessory_cost)}}<br>
@@ -976,7 +976,7 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-3">{{ trans('general.name') }}</th>
+                  <th class="col-md-3 col-xs-5">{{ trans('general.name') }}</th>
                   <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.unit_cost') }}</th>
                   <th class="col-md-2">{{ trans('general.date') }}</th>
                     <th class="col-md-5">{{ trans('general.notes') }}</th>

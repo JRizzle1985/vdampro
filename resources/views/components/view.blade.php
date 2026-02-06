@@ -52,7 +52,7 @@
 @section('content')
 {{-- Page content --}}
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 col-xs-7">
 
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
@@ -177,7 +177,7 @@
 
 
   <!-- side address column -->
-  <div class="col-md-3">
+  <div class="col-md-3 col-xs-5">
     @if ($component->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
         <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox" data-type="image">

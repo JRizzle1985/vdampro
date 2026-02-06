@@ -41,7 +41,7 @@
         </div>
     @endif
 
-    <div class="col-md-9">
+    <div class="col-md-9 col-xs-7">
 
         <div class="nav-tabs-custom">
 
@@ -124,7 +124,7 @@
         </div>  <!-- /.nav-tabs-custom -->
     </div><!-- /. col-md-12 -->
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-xs-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-default">

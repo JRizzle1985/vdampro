@@ -14,7 +14,7 @@
 {{-- Page content --}}
 @section('content')
     <x-container columns="2">
-        <x-page-column class="col-md-9">
+        <x-page-column class="col-md-9 col-xs-7">
             <x-box.container>
 
 
@@ -35,7 +35,7 @@
 
         </x-page-column>
 
-        <x-page-column class="col-md-3">
+        <x-page-column class="col-md-3 col-xs-5">
 
             @if (is_array($group->decodePermissions()))
             <ul class="list-unstyled">

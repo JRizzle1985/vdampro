@@ -168,10 +168,10 @@
                   <!-- company -->
                   @if ($consumable->company)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.company') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $consumable->company->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -180,10 +180,10 @@
                   <!-- category -->
                   @if ($consumable->category)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.category') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $consumable->category->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -192,10 +192,10 @@
                   <!-- total -->
                   @if ($consumable->qty)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/components/general.total') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $consumable->qty }}
                       </div>
                     </div>
@@ -204,10 +204,10 @@
                   <!-- remaining -->
                   @if ($consumable->numRemaining())
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.remaining') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @if ($consumable->numRemaining() < (int) $consumable->min_amt)
                           <i class="fas fa-exclamation-triangle text-orange"
                              aria-hidden="true"
@@ -224,10 +224,10 @@
                   <!-- min amt -->
                   @if ($consumable->min_amt)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.min_amt') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $consumable->min_amt }}
                       </div>
                     </div>
@@ -236,10 +236,10 @@
                   <!-- locationm -->
                   @if ($consumable->location)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.location') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $consumable->location->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -248,10 +248,10 @@
                   <!-- supplier -->
                   @if ($consumable->supplier)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.supplier') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $consumable->supplier->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -260,10 +260,10 @@
                   <!-- supplier -->
                   @if ($consumable->manufacturer)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.manufacturer') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                           {!!  $consumable->manufacturer->present()->formattedNameLink !!}
                       </div>
                     </div>
@@ -271,10 +271,10 @@
 
                   @if ($consumable->purchase_cost)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.unit_cost') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ $snipeSettings->default_currency }}
                         {{ Helper::formatCurrencyOutput($consumable->purchase_cost) }}
                       </div>
@@ -283,10 +283,10 @@
 
                   @if ($consumable->purchase_cost)
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-5">
                                 {{ trans('general.total_cost') }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-xs-7">
                                 {{ $snipeSettings->default_currency }}
                                 {{ Helper::formatCurrencyOutput($consumable->totalCostSum()) }}
                             </div>
@@ -295,10 +295,10 @@
 
                   @if ($consumable->order_number)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.order_number') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         <span class="js-copy">{{ $consumable->order_number  }}</span>
                         <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                           <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
@@ -310,10 +310,10 @@
 
                   @if ($consumable->item_no)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/consumables/general.item_no') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
 
                         <span class="js-copy-item_no">{{ $consumable->item_no  }}</span>
                         <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-item_no"
@@ -328,10 +328,10 @@
 
                   @if ($consumable->model_number)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.model_no') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
 
                         <span class="js-copy-model_no">{{ $consumable->model_number  }}</span>
                         <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-model_no"
@@ -347,10 +347,10 @@
                   <!-- purchase date -->
                   @if ($consumable->purchase_date)
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.purchase_date') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ \App\Helpers\Helper::getFormattedDateObject($consumable->purchase_date, 'datetime', false) }}
                       </div>
                     </div>
@@ -359,10 +359,10 @@
                   @if ($consumable->adminuser)
                     <!-- created at -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.created_by') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         @if ($consumable->adminuser->deleted_at == '')
                           <a href="{{ route('users.show', ['user' => $consumable->adminuser]) }}">{{ $consumable->adminuser->present()->fullName }}</a>
                         @else
@@ -375,10 +375,10 @@
                   @if ($consumable->created_at)
                     <!-- created at -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.created_at') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ \App\Helpers\Helper::getFormattedDateObject($consumable->created_at, 'datetime')['formatted']}}
                       </div>
                     </div>
@@ -387,10 +387,10 @@
                   @if ($consumable->updated_at)
                     <!-- created at -->
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('general.updated_at') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {{ \App\Helpers\Helper::getFormattedDateObject($consumable->updated_at, 'datetime')['formatted']}}
                       </div>
                     </div>
@@ -400,10 +400,10 @@
                     <!-- empty -->
                     <div class="row">
 
-                      <div class="col-md-3">
+                      <div class="col-md-3 col-xs-5">
                         {{ trans('admin/users/table.notes') }}
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9 col-xs-7">
                         {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
                       </div>
 

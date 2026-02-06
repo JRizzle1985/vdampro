@@ -475,7 +475,10 @@ class AssetPresenter extends Presenter
         }
         $url = config('app.url');
         if (! empty($imagePath)) {
-            $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.' height="50" width="50" alt="'.$imageAlt.'">';
+            if (filter_var($imagePath, FILTER_VALIDATE_URL)) {
+                return '<img src="'.$imagePath.'" height="50" width="50" alt="'.$imageAlt.'">';
+            }
+            $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.'" height="50" width="50" alt="'.$imageAlt.'">';
         }
 
         return $imagePath;
@@ -494,6 +497,9 @@ class AssetPresenter extends Presenter
             $imagePath = $this->model->image;
         }
         if (! empty($imagePath)) {
+            if (filter_var($imagePath, FILTER_VALIDATE_URL)) {
+                return $imagePath;
+            }
             return config('app.url').'/uploads/assets/'.$imagePath;
         }
 

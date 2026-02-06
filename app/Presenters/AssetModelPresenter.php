@@ -274,6 +274,9 @@ class AssetModelPresenter extends Presenter
     public function imageUrl()
     {
         if (! empty($this->image)) {
+            if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+                return '<img src="'.$this->image.'" alt="'.$this->name.'" height="50" width="50">';
+            }
             return '<img src="'.config('app.url').'/uploads/models/'.$this->image.'" alt="'.$this->name.'" height="50" width="50">';
         }
 
@@ -287,6 +290,9 @@ class AssetModelPresenter extends Presenter
     public function imageSrc()
     {
         if (! empty($this->image)) {
+            if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+                return $this->image;
+            }
             return config('app.url').'/uploads/models/'.$this->image;
         }
 

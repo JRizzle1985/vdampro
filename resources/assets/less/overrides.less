@@ -24,8 +24,8 @@
   --vdot-border-focus: #0ea5e9;
   
   --vdot-radius: 6px;
-  --vdot-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --vdot-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --vdot-shadow: none;
+  --vdot-shadow-lg: none;
 }
 
 body {
@@ -106,8 +106,8 @@ a {
   background-clip: padding-box;
   border: 1px solid #94a3b8; /* High contrast border */
   border-radius: var(--vdot-radius);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  box-shadow: none;
+  transition: border-color .15s ease-in-out;
 
   &::placeholder {
     color: #94a3b8;
@@ -119,7 +119,7 @@ a {
     background-color: #fff;
     border-color: var(--vdot-border-focus);
     outline: 0;
-    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
+    box-shadow: none;
   }
 }
 

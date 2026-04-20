@@ -21981,18 +21981,91 @@ label {
   color: #4b5563;
   font-weight: 600;
   font-size: 0.8125rem;
-  padding: 0.875rem 1rem;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
 }
 .table tbody td {
-  padding: 0.875rem 1rem;
+  padding: 0.5rem 0.75rem;
   vertical-align: middle;
   border-top: 1px solid var(--vdot-border);
+  font-size: 0.875rem;
+}
+.table tbody tr {
+  min-height: 0;
 }
 .table.table-striped tbody tr:nth-of-type(odd) {
   background-color: transparent;
 }
 .table.table-hover tbody tr:hover {
   background-color: var(--vdot-bg-subtle);
+}
+/* Cap thumbnail images in table cells */
+.table td img,
+td .asset-image,
+td img.asset-image,
+.bootstrap-table td img {
+  max-height: 36px !important;
+  width: auto !important;
+  border-radius: 4px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+/* Table toolbar (column picker, add, delete, refresh, export, print, etc.) */
+.fixed-table-toolbar .btn,
+.fixed-table-toolbar .btn-group .btn,
+.bootstrap-table .fixed-table-toolbar .btn {
+  background-color: #ffffff !important;
+  border: 1px solid var(--vdot-border) !important;
+  color: var(--vdot-text-muted) !important;
+  box-shadow: none !important;
+  padding: 0.3125rem 0.625rem;
+  font-size: 0.8125rem;
+}
+.fixed-table-toolbar .btn:hover,
+.fixed-table-toolbar .btn-group .btn:hover,
+.bootstrap-table .fixed-table-toolbar .btn:hover,
+.fixed-table-toolbar .btn:focus,
+.fixed-table-toolbar .btn-group .btn:focus,
+.bootstrap-table .fixed-table-toolbar .btn:focus,
+.fixed-table-toolbar .btn:active,
+.fixed-table-toolbar .btn-group .btn:active,
+.bootstrap-table .fixed-table-toolbar .btn:active {
+  background-color: var(--vdot-bg-subtle) !important;
+  color: var(--vdot-text-main) !important;
+  border-color: #d1d5db !important;
+}
+/* Rows-per-page dropdown button */
+.bootstrap-table .page-size,
+.per-page-dropdown,
+.bootstrap-table .page-list .btn {
+  background-color: #ffffff !important;
+  border: 1px solid var(--vdot-border) !important;
+  color: var(--vdot-text-main) !important;
+  box-shadow: none !important;
+}
+/* Row action buttons — compact, icon-style */
+.btn-sm.checkout-btn,
+.actions-column .btn,
+.actions-column .btn-sm,
+td.text-right .btn,
+td .btn-sm,
+td .btn-xs {
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.75rem !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+/* "Checkout" action button — subtle */
+a.btn.btn-sm.checkout-btn,
+.btn.checkout {
+  background-color: #ffffff !important;
+  border: 1px solid #0ea5e9 !important;
+  color: #0ea5e9 !important;
+}
+a.btn.btn-sm.checkout-btn:hover,
+.btn.checkout:hover {
+  background-color: #0ea5e9 !important;
+  color: #ffffff !important;
 }
 /* --- Setup Wizard Specifics --- */
 .page-header {
@@ -23936,18 +24009,91 @@ label {
   color: #4b5563;
   font-weight: 600;
   font-size: 0.8125rem;
-  padding: 0.875rem 1rem;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
 }
 .table tbody td {
-  padding: 0.875rem 1rem;
+  padding: 0.5rem 0.75rem;
   vertical-align: middle;
   border-top: 1px solid var(--vdot-border);
+  font-size: 0.875rem;
+}
+.table tbody tr {
+  min-height: 0;
 }
 .table.table-striped tbody tr:nth-of-type(odd) {
   background-color: transparent;
 }
 .table.table-hover tbody tr:hover {
   background-color: var(--vdot-bg-subtle);
+}
+/* Cap thumbnail images in table cells */
+.table td img,
+td .asset-image,
+td img.asset-image,
+.bootstrap-table td img {
+  max-height: 36px !important;
+  width: auto !important;
+  border-radius: 4px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+/* Table toolbar (column picker, add, delete, refresh, export, print, etc.) */
+.fixed-table-toolbar .btn,
+.fixed-table-toolbar .btn-group .btn,
+.bootstrap-table .fixed-table-toolbar .btn {
+  background-color: #ffffff !important;
+  border: 1px solid var(--vdot-border) !important;
+  color: var(--vdot-text-muted) !important;
+  box-shadow: none !important;
+  padding: 0.3125rem 0.625rem;
+  font-size: 0.8125rem;
+}
+.fixed-table-toolbar .btn:hover,
+.fixed-table-toolbar .btn-group .btn:hover,
+.bootstrap-table .fixed-table-toolbar .btn:hover,
+.fixed-table-toolbar .btn:focus,
+.fixed-table-toolbar .btn-group .btn:focus,
+.bootstrap-table .fixed-table-toolbar .btn:focus,
+.fixed-table-toolbar .btn:active,
+.fixed-table-toolbar .btn-group .btn:active,
+.bootstrap-table .fixed-table-toolbar .btn:active {
+  background-color: var(--vdot-bg-subtle) !important;
+  color: var(--vdot-text-main) !important;
+  border-color: #d1d5db !important;
+}
+/* Rows-per-page dropdown button */
+.bootstrap-table .page-size,
+.per-page-dropdown,
+.bootstrap-table .page-list .btn {
+  background-color: #ffffff !important;
+  border: 1px solid var(--vdot-border) !important;
+  color: var(--vdot-text-main) !important;
+  box-shadow: none !important;
+}
+/* Row action buttons — compact, icon-style */
+.btn-sm.checkout-btn,
+.actions-column .btn,
+.actions-column .btn-sm,
+td.text-right .btn,
+td .btn-sm,
+td .btn-xs {
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.75rem !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+/* "Checkout" action button — subtle */
+a.btn.btn-sm.checkout-btn,
+.btn.checkout {
+  background-color: #ffffff !important;
+  border: 1px solid #0ea5e9 !important;
+  color: #0ea5e9 !important;
+}
+a.btn.btn-sm.checkout-btn:hover,
+.btn.checkout:hover {
+  background-color: #0ea5e9 !important;
+  color: #ffffff !important;
 }
 /* --- Setup Wizard Specifics --- */
 .page-header {

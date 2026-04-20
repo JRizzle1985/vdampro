@@ -166,27 +166,24 @@
             color: var(--color-fg) !important;
         }
 
+        /* btn-theme: outline style, accent on hover */
         .btn-theme {
-            background-color: var(--btn-theme-base);
-            /*color: var(--btn-theme-hover-text-color) !important;*/
-            color: var(--nav-primary-text-color) !important;
-            border: 1px solid hsl(from var(--btn-theme-base) h s calc(l - 15)) !important;
+            background-color: transparent !important;
+            color: var(--main-theme-color) !important;
+            border: 1px solid var(--main-theme-color) !important;
+            font-weight: 500 !important;
         }
 
-        .btn-theme:hover {
-            background-color: var(--btn-theme-hover);
-            /*color: var(--btn-theme-hover-text-color) !important;*/
-            color: var(--nav-primary-text-color) !important;
-            border: 1px solid hsl(from var(--btn-theme-base) h s calc(l - 15)) !important;
-        }
-
-        .btn-theme.active
-        {
-            background-color: var(--btn-theme-hover) !important;
-        }
-
+        .btn-theme:hover,
         .btn-theme:focus {
-            color: var(--nav-primary-text-color) !important;
+            background-color: var(--main-theme-color) !important;
+            color: #ffffff !important;
+            border: 1px solid var(--main-theme-color) !important;
+        }
+
+        .btn-theme.active {
+            background-color: var(--main-theme-color) !important;
+            color: #ffffff !important;
         }
 
 
@@ -1208,7 +1205,7 @@
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button above the compact sidenav -->
-                    <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu"
+                    <a href="#" style="color: #6b7280" class="sidebar-toggle btn btn-white" data-toggle="push-menu"
                        role="button">
                         <span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
                     </a>

@@ -19,10 +19,10 @@
 {{-- Page content --}}
 @section('content')
     <x-container>
-        <x-box.container>
+        <x-box>
 
                 <table
-                        data-columns="{{ \App\Presenters\HistoryPresenter::dataTableLayout($serial = true) }}"
+                    data-columns="{{ \App\Presenters\HistoryPresenter::dataTableLayout() }}"
                         data-cookie-id-table="activityReport"
                         data-id-table="activityReport"
                         data-side-pagination="server"
@@ -37,7 +37,7 @@
                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                         }'>
                 </table>
-        </x-box.container>
+        </x-box>
     </x-container>
 @stop
 

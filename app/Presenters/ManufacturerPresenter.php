@@ -9,15 +9,18 @@ class ManufacturerPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
+     *
      * @return string
      */
     public static function dataTableLayout()
     {
         $layout = [
             [
-                'field'        => 'checkbox',
-                'checkbox'     => true,
+                'field' => 'checkbox',
+                'checkbox' => true,
                 'titleTooltip' => trans('general.select_all_none'),
+                'printIgnore' => true,
+                'class' => 'hidden-print',
             ],
             [
                 'field' => 'id',
@@ -168,6 +171,7 @@ class ManufacturerPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'manufacturersActionsFormatter',
                 'printIgnore' => true,
+                'class' => 'hidden-print',
             ],
         ];
 
@@ -176,15 +180,21 @@ class ManufacturerPresenter extends Presenter
 
     /**
      * Link to this manufacturers name
+     *
      * @return string
      */
     public function nameUrl()
     {
-        return (string) link_to_route('manufacturers.show', $this->name, $this->id);
+        if (auth()->user()->can('view', ['\App\Models\Manufacturer', $this])) {
+            return '<a href="'.route('manufacturers.show', $this->id).'">'.e($this->display_name).'</a>';
+        } else {
+            return e($this->display_name);
+        }
     }
 
     /**
      * Url to view this item.
+     *
      * @return string
      */
     public function viewUrl()
@@ -192,13 +202,13 @@ class ManufacturerPresenter extends Presenter
         return route('manufacturers.show', $this->id);
     }
 
-    public function formattedNameLink() {
+    public function formattedNameLink()
+    {
 
         if (auth()->user()->can('view', ['\App\Models\Manufacturer', $this])) {
-            return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').'<a href="'.route('manufacturers.show', e($this->id)).'">'.e($this->name).'</a>';
+            return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').'<a href="'.route('manufacturers.show', e($this->id)).'">'.e($this->display_name).'</a>';
         }
 
-        return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i> " : '').$this->name;
+        return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').e($this->display_name);
     }
-
 }

@@ -64,16 +64,15 @@
                             <!-- New Settings -->
 
                         <fieldset name="select-template">
-                            <x-form-legend>
+                            <x-form.legend>
                                 {{ trans('admin/settings/general.select_template') }}
-                            </x-form-legend>
+                            </x-form.legend>
 
                             <!-- Template -->
                             <div class="form-group{{ $errors->has('label2_template') ? ' has-error' : '' }}">
 
                                 <div class="col-md-12">
                                     <table
-
                                         data-columns="{{ \App\Presenters\LabelPresenter::dataTableLayout() }}"
                                         data-cookie="true"
                                         data-cookie-id-table="label2TemplateTable"
@@ -104,9 +103,9 @@
                         </fieldset>
 
                         <fieldset name="label-settings">
-                            <x-form-legend help_text="{{ trans('admin/settings/general.labels_title_help') }}">
+                            <x-form.legend help_text="{{ trans('admin/settings/general.labels_title_help') }}">
                                 {{ trans('admin/settings/general.labels_title') }}
-                            </x-form-legend>
+                            </x-form.legend>
 
                             <!-- Title -->
                             <div class="form-group{{ $errors->has('label2_title') ? ' has-error' : '' }}">
@@ -284,7 +283,7 @@
                                         <label for="purge_barcodes" class="control-label">{{ trans('admin/settings/general.purge_barcodes') }}</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <a class="btn btn-default btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
+                                        <a class="btn btn-theme btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
                                             {{ trans('admin/settings/general.barcode_delete_cache') }}
                                         </a>
                                         <span id="purgebarcodesicon"></span>
@@ -367,9 +366,9 @@
 
 
                         <fieldset name="field-definitions">
-                            <x-form-legend help_text="{!! trans('admin/settings/general.label2_fields_help') !!}">
+                            <x-form.legend help_text="{!! trans('admin/settings/general.label2_fields_help') !!}">
                                Label Fields
-                            </x-form-legend>
+                            </x-form.legend>
                             <!-- Fields -->
                             <div class="form-group {{ $errors->has('label2_fields') ? 'error' : '' }}">
                                 <div class="col-md-12">
@@ -381,9 +380,9 @@
                     </fieldset>
 
                     <fieldset name="label-preview">
-                        <x-form-legend>
-                            Label Preview
-                        </x-form-legend>
+                        <x-form.legend>
+                            {{ trans('admin/settings/general.label2_label_preview') }}: <code>{{ $setting->label2_template}}</code>
+                        </x-form.legend>
                             <div class="col-md-12" style="margin-bottom: 10px;">
                                 @include('partials.label2-preview')
                             </div>

@@ -299,12 +299,12 @@
 
                       <fieldset>
 
-                          <x-form-legend>
+                          <x-form.legend>
                               <h4 id="optional_user_details" class="remember-toggle">
                                   <x-icon type="caret-down" class="fa-fw" id="toggle-arrow-optional_user_details" />
                                   {{ trans('admin/hardware/form.optional_infos') }}
                               </h4>
-                          </x-form-legend>
+                          </x-form.legend>
 
                           <div class="col-md-12 toggle-content-optional_user_details">
 
@@ -330,7 +330,7 @@
 
                               <!-- Company -->
                               @if ((Gate::allows('canEditAuthFields', $user)) && (\App\Models\Company::canManageUsersCompanies()))
-                                  @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
+                                  @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
                               @else
                                   @if ($user->company)
                                       <div class="form-group">
@@ -502,7 +502,11 @@
                               <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                                   <label class="col-md-3 control-label" for="country">{{ trans('general.country') }}</label>
                                   <div class="col-md-6">
-                                      {!! Form::countries('country', old('country', $user->country), 'col-md-12 select2') !!}
+                                      <x-input.country-select
+                                        name="country"
+                                        :selected="old('country', $user->country)"
+                                        class="col-md-12"
+                                      />
 
                                       <p class="help-block">{{ trans('general.countries_manually_entered_help') }}</p>
                                       {!! $errors->first('country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}

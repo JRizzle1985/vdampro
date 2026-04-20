@@ -28,38 +28,18 @@
 {{-- Page content --}}
 @section('content')
     <x-container>
-        <x-box.container>
-
-            @include('partials.users-bulk-actions')
-
-            <table
-                    data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
-                    data-cookie-id-table="usersTable"
-                    data-id-table="usersTable"
-                    data-side-pagination="server"
-                    data-toolbar="#userBulkEditToolbar"
-                    data-bulk-button-id="#bulkUserEditButton"
-                    data-bulk-form-id="#usersBulkForm"
-                    data-show-columns-search="true"
-                    id="usersTable"
-                    data-buttons="userButtons"
-                    class="table table-striped snipe-table"
-                    data-url="{{ route('api.users.index',
-                        [
-                            'status' => e(request('status')),
-                            'deleted'=> (request('status')=='deleted') ? 'true' : 'false',
-                            'company_id' => e(request('company_id')),
-                            'manager_id' => e(request('manager_id')),
-                            'admins' => e(request('admins')),
-                            'superadmins' => e(request('superadmins')),
-                            'activated' => e(request('activated')),
-                       ]) }}"
-                    data-export-options='{
-                "fileName": "export-users-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-                    </table>
-        </x-box.container>
+        <x-box>
+            <x-table.users :route="route('api.users.index',
+                [
+                    'status' => e(request('status')),
+                    'deleted'=> (request('status')=='deleted') ? 'true' : 'false',
+                    'company_id' => e(request('company_id')),
+                    'manager_id' => e(request('manager_id')),
+                    'admins' => e(request('admins')),
+                    'superadmins' => e(request('superadmins')),
+                    'activated' => e(request('activated')),
+               ])"/>
+        </x-box>
     </x-container>
 
 
@@ -67,8 +47,6 @@
 
 @section('moar_scripts')
 
-
-@include ('partials.bootstrap-table')
-
+    @include ('partials.bootstrap-table')
 
 @stop

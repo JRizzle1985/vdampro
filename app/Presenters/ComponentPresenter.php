@@ -9,6 +9,7 @@ class ComponentPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
+     *
      * @return string
      */
     public static function dataTableLayout()
@@ -21,6 +22,13 @@ class ComponentPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.id'),
                 'visible' => false,
+            ], [
+                'field' => 'name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.name'),
+                'visible' => true,
+                'formatter' => 'componentsLinkFormatter',
             ],
             [
                 'field' => 'company',
@@ -32,13 +40,6 @@ class ComponentPresenter extends Presenter
                 'formatter' => 'companiesLinkObjFormatter',
             ],
             [
-                'field' => 'name',
-                'searchable' => true,
-                'sortable' => true,
-                'title' => trans('general.name'),
-                'visible' => true,
-                'formatter' => 'componentsLinkFormatter',
-            ], [
                 'field' => 'image',
                 'searchable' => false,
                 'sortable' => true,
@@ -123,12 +124,21 @@ class ComponentPresenter extends Presenter
                 'class' => 'text-right text-padding-number-cell',
                 'footerFormatter' => 'qtySumFormatter',
             ], [
+                'field' => 'percent_remaining',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => '% '.trans('general.remaining'),
+                'visible' => true,
+                'formatter' => 'progressBarFormatter',
+            ], [
                 'field' => 'purchase_cost',
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.unit_cost'),
                 'visible' => true,
                 'class' => 'text-right',
+                'footerFormatter' => 'sumFormatter',
             ], [
                 'field' => 'total_cost',
                 'searchable' => false,
@@ -143,14 +153,14 @@ class ComponentPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.notes'),
                 'formatter' => 'notesFormatter',
-            ],[
+            ], [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('general.created_by'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
-            ],[
+            ], [
                 'field' => 'created_at',
                 'searchable' => false,
                 'sortable' => true,
@@ -186,6 +196,68 @@ class ComponentPresenter extends Presenter
             'title' => trans('table.actions'),
             'formatter' => 'componentsActionsFormatter',
             'printIgnore' => true,
+            'class' => 'hidden-print',
+        ];
+
+        return json_encode($layout);
+    }
+
+    public static function checkedOut()
+    {
+        $layout = [
+
+            [
+                'field' => 'name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.name'),
+                'visible' => true,
+                'formatter' => 'polymorphicItemFormatter',
+            ],
+            [
+                'field' => 'assigned_qty',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.qty'),
+                'visible' => true,
+                'footerFormatter' => 'qtySumFormatter',
+            ],
+            [
+                'field' => 'note',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => true,
+                'title' => trans('general.notes'),
+                'formatter' => 'notesFormatter',
+            ], [
+                'field' => 'created_at',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.created_at'),
+                'formatter' => 'dateDisplayFormatter',
+            ],
+            [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.created_by'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ],
+            [
+                'field' => 'available_actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
+                'visible' => true,
+                'formatter' => 'componentsInOutFormatter',
+                'printIgnore' => true,
+                'class' => 'hidden-print',
+
+            ],
         ];
 
         return json_encode($layout);
@@ -193,15 +265,21 @@ class ComponentPresenter extends Presenter
 
     /**
      * Generate html link to this items name.
+     *
      * @return string
      */
     public function nameUrl()
     {
-        return (string) link_to_route('consumables.show', e($this->name), $this->id);
+        if (auth()->user()->can('view', ['\App\Models\Component', $this])) {
+            return '<a href="'.route('components.show', $this->id).'">'.e($this->display_name).'</a>';
+        } else {
+            return e($this->display_name);
+        }
     }
 
     /**
      * Url to view this item.
+     *
      * @return string
      */
     public function viewUrl()

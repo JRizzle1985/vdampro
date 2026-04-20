@@ -2,8 +2,6 @@
     'createText' => trans('admin/locations/table.create') ,
     'updateText' => trans('admin/locations/table.update'),
     'topSubmit' => true,
-    'helpPosition' => 'right',
-    'helpText' => trans('admin/locations/table.about_locations'),
     'formAction' => (isset($item->id)) ? route('locations.update', ['location' => $item->id]) : route('locations.store'),
 ])
 
@@ -79,9 +77,9 @@
 </div>
 
 <fieldset name="color-preferences">
-    <x-form-legend help_text="{{ trans('general.tag_color_help') }}">
+    <x-form.legend help_text="{{ trans('general.tag_color_help') }}">
         {{ trans('general.tag_color') }}
-    </x-form-legend>
+    </x-form.legend>
     <!--  color -->
     <div class="form-group {{ $errors->has('tag_color') ? 'error' : '' }}">
         <label for="tag_color" class="col-md-3 control-label">

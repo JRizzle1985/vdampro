@@ -3,10 +3,10 @@
 @section('title0')
 
   @php
-    $requestStatus = request()->input('status');
-    $requestOrderNumber = request()->input('order_number');
-    $requestCompanyId = request()->input('company_id');
-    $requestStatusId = request()->input('status_id');
+      $requestStatusType = request()->input('status_type');
+      $requestOrderNumber = request()->input('order_number');
+      $requestCompanyId = request()->input('company_id');
+      $requestStatusTypeId = request()->input('status_id');
   @endphp
 
   @if (($requestCompanyId) && ($company))
@@ -15,24 +15,24 @@
 
 
 
-@if ($requestStatus)
-  @if ($requestStatus=='Pending')
+  @if ($requestStatusType)
+      @if ($requestStatusType=='Pending')
     {{ trans('general.pending') }}
-  @elseif ($requestStatus=='RTD')
+      @elseif ($requestStatusType=='RTD')
     {{ trans('general.ready_to_deploy') }}
-  @elseif ($requestStatus=='Deployed')
+      @elseif ($requestStatusType=='Deployed')
     {{ trans('general.deployed') }}
-  @elseif ($requestStatus=='Undeployable')
+      @elseif ($requestStatusType=='Undeployable')
     {{ trans('general.undeployable') }}
-  @elseif ($requestStatus=='Deployable')
+      @elseif ($requestStatusType=='Deployable')
     {{ trans('general.deployed') }}
-  @elseif ($requestStatus=='Requestable')
+      @elseif ($requestStatusType=='Requestable')
     {{ trans('admin/hardware/general.requestable') }}
-  @elseif ($requestStatus=='Archived')
+      @elseif ($requestStatusType=='Archived')
     {{ trans('general.archived') }}
-  @elseif ($requestStatus=='Deleted')
+      @elseif ($requestStatusType=='Deleted')
     {{ ucfirst(trans('general.deleted')) }}
-  @elseif ($requestStatus=='byod')
+      @elseif ($requestStatusType=='byod')
     {{ strtoupper(trans('general.byod')) }}
   @endif
 @else
@@ -54,38 +54,13 @@
 {{-- Page content --}}
 @section('content')
     <x-container>
-        <x-box.container>
-
-                @include('partials.asset-bulk-actions', ['status' => $requestStatus])
-                   
-              <table
-                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                data-cookie-id-table="{{ request()->has('status') ? e(request()->input('status')) : ''  }}assetsListingTable"
-                data-id-table="{{ request()->has('status') ? e(request()->input('status')) : ''  }}assetsListingTable"
-                data-side-pagination="server"
-                data-show-footer="true"
-                data-sort-order="asc"
-                data-sort-name="name"
-                data-search-text="{{ session()->get('search') }}"
-                data-show-columns-search="true"
-                data-toolbar="#assetsBulkEditToolbar"
-                data-bulk-button-id="#bulkAssetEditButton"
-                data-bulk-form-id="#assetsBulkForm"
-                data-buttons="assetButtons"
-                id="{{ request()->has('status') ? e(request()->input('status')) : ''  }}assetsListingTable"
-                class="table table-striped snipe-table"
-                data-url="{{ route('api.assets.index',
-                    array('status' => e($requestStatus),
-                    'order_number'=>e(strval($requestOrderNumber)),
-                    'company_id'=>e($requestCompanyId),
-                    'status_id'=>e($requestStatusId))) }}"
-                data-export-options='{
-                "fileName": "export{{ (Request::has('status')) ? '-'.str_slug($requestStatus) : '' }}-assets-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-              </table>
-
-        </x-box.container>
+        <x-box name="assets">
+            <x-table.assets :route="route('api.assets.index',
+                array('status_type' => e($requestStatusType),
+                'order_number'=>e(strval($requestOrderNumber)),
+                'company_id'=>e($requestCompanyId),
+                'status_id'=>e($requestStatusTypeId)))"/>
+        </x-box>
     </x-container>
 @stop
 

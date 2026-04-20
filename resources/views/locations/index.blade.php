@@ -9,9 +9,9 @@
 
 @section('content')
     <x-container>
-        <x-box.container>
+        <x-box>
             @include('partials.locations-bulk-actions')
-
+            
             <table
                     data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
                     data-cookie-id-table="locationTable"
@@ -32,7 +32,7 @@
                       }'>
             </table>
 
-        </x-box.container>
+        </x-box>
     </x-container>
 @stop
 

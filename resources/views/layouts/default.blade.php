@@ -320,7 +320,7 @@
         }
 
         .content-wrapper {
-            background-color: var(--color-bg);
+            background-color: #ffffff !important;
         }
 
         .btn-anchor {
@@ -386,7 +386,7 @@
 
         body
         {
-            background-color: var(--color-bg);
+            background-color: #ffffff !important;
             color: var(--color-fg);
         }
 
@@ -535,87 +535,178 @@
         }
 
 
+        /* Table striping: removed — white rows only (Apple minimalist) */
         .table-striped > tbody > tr:nth-of-type(even),
+        .table-striped > tbody > tr:nth-of-type(odd),
         .row-new-striped > .row:nth-of-type(even),
-        .row-new-striped > .div:nth-of-type(odd),
-        .cansort
+        .row-new-striped > .row:nth-of-type(odd),
+        .row-new-striped > .div:nth-of-type(odd)
         {
-            background-color: var(--table-stripe-bg) !important;
-            border-top: var(--table-border-row-top) !important;
+            background-color: transparent !important;
+            border-top: 1px solid #e5e7eb !important;
             color: var(--color-fg) !important;
         }
 
-        .table-striped > tbody > tr:nth-of-type(odd),
-        .row-new-striped > .row:nth-of-type(even),
-        .row-new-striped > .div:nth-of-type(odd),
         .cansort
         {
-            background-color: var(--table-stripe-bg-alt) !important;
-            border-top: var(--table-border-row-top) !important;
+            background-color: #f9fafb !important;
+            border-top: 1px solid #e5e7eb !important;
             color: var(--color-fg) !important;
+        }
+
+        /* Row hover: very subtle */
+        .table-hover > tbody > tr:hover {
+            background-color: #f9fafb !important;
         }
 
 
 
 
         /**
-        main header nav
+        main header nav — Apple-minimalist override: white navbar, flat dropdowns
          */
 
-
-        .dropdown-menu {
-            background-color: var(--main-theme-color);
-            border-color: var(--main-theme-color);
-        }
-
-
-        .dropdown-menu > li,
+        /* Navbar: always white, no theme colour */
+        .main-header .navbar,
+        .main-header .navbar.navbar-static-top,
         .navbar,
-        .navbar-nav,
-        .label-default,
-        .label-default:hover
+        .navbar-nav
         {
-            background-color: var(--main-theme-color);
-            color: var(--nav-primary-text-color) !important;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #374151 !important;
+            box-shadow: none !important;
+            border-bottom: none !important;
         }
 
+        .main-header {
+            border-bottom: 1px solid #e5e7eb !important;
+            box-shadow: none !important;
+        }
+
+        .main-header .logo {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #111827 !important;
+            border-right: 1px solid #e5e7eb !important;
+            box-shadow: none !important;
+        }
+
+        /* Navbar links */
+        .navbar-nav > li > a,
+        .navbar-nav > li > a:link,
+        .navbar-nav > li > a:visited
+        {
+            background-color: transparent !important;
+            color: #6b7280 !important;
+        }
+
+        .navbar-nav > li > a:hover,
+        .navbar-nav > li > a:focus,
+        .navbar-nav .open > a:link,
+        .navbar-nav .open > a:visited,
+        .navbar-nav .open > a:focus,
+        .navbar-nav .open > a:hover,
+        .main-header .navbar .nav>.active>a
+        {
+            background-color: #f9fafb !important;
+            color: #111827 !important;
+        }
+
+        /* Dropdowns: white, flat, no theme colour */
+        .dropdown-menu,
+        .dropdown-menu > li
+        {
+            background-color: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+            color: #374151 !important;
+        }
 
         .dropdown-menu > li > a,
         .dropdown-menu > li > a:link,
         .dropdown-menu > li > a:visited,
         .dropdown-menu > .active > a:link,
-        .dropdown-menu > .active > a:visited,
-        .navbar-nav .open > a:link,
-        .navbar-nav .open > a:visited,
-        .navbar-nav > li > a:link,
-        .navbar-nav > li > a:visited
+        .dropdown-menu > .active > a:visited
         {
-            background-color: var(--main-theme-color) !important;
-            /*background-color: rgba(0,0,0,.15);*/
-            color: var(--nav-primary-text-color) !important;
-            /*color: var(--nav-primary-text-color) !important;*/
-
+            background-color: transparent !important;
+            color: #374151 !important;
         }
 
+        .dropdown-menu > li > a:hover,
+        .dropdown-menu > li > a:focus,
+        .dropdown-menu > li:hover,
+        .dropdown-menu > li:focus,
+        .dropdown-menu > .active > a:hover,
+        .dropdown-menu > .active > a:focus
+        {
+            background-color: #f9fafb !important;
+            color: #111827 !important;
+        }
+
+        /* Column selector and toolbar dropdowns */
         .btn-tableButton.active.focus,
         .btn-tableButton.active:focus,
         .btn-tableButton.active:hover,
-        .dropdown-menu > .active > a:focus,
-        .dropdown-menu > .active > a:hover,
-        .dropdown-menu > .active > a:link,
-        .dropdown-menu > .active > a:visited,
-        .dropdown-menu > li > a:focus,
-        .dropdown-menu > li > a:hover,
-        .dropdown-menu > li:focus,
-        .dropdown-menu > li:hover,
-        .navbar-nav .open  li.active > a:focus,
-        .navbar-nav .open  li.active > a:hover,
-        .navbar-nav .open > a:focus,
-        .navbar-nav .open > a:hover,
-        .navbar-nav > li > a:focus,
-        .navbar-nav > li > a:hover,
         .open > .dropdown-toggle.btn-tableButton:focus,
-        .open > .dropdown-toggle.btn-tableButton:hover,
+        .open > .dropdown-toggle.btn-tableButton:hover
+        {
+            background-color: #f3f4f6 !important;
+            border-color: #d1d5db !important;
+            color: #374151 !important;
+        }
+
+        .bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label
+        {
+            color: #374151 !important;
+        }
+
+        .bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label:hover
+        {
+            background-color: #f9fafb !important;
+            color: #111827 !important;
+        }
+
+        /* Notification / message dropdowns in navbar */
+        .navbar-nav > .notifications-menu > .dropdown-menu > li.header,
+        .navbar-nav > .messages-menu > .dropdown-menu > li.header,
+        .navbar-nav > .tasks-menu > .dropdown-menu > li.header,
+        .navbar-nav > .notifications-menu > .dropdown-menu > li .menu,
+        .navbar-nav > .messages-menu > .dropdown-menu > li .menu,
+        .navbar-nav > .tasks-menu > .dropdown-menu > li .menu,
+        .navbar-nav > .tasks-menu > .dropdown-menu > li:hover,
+        .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li:hover > a,
+        .task_menu
+        {
+            background-color: #ffffff !important;
+            color: #374151 !important;
+            margin-bottom: 0;
+        }
+
+        .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a,
+        .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a,
+        .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151 !important;
+        }
+
+        /* label-default (count badges in navbar) */
+        .label-default,
+        .label-default:hover
+        {
+            background-color: #e5e7eb !important;
+            color: #374151 !important;
+        }
+
+        /* Pagination: flat, accent on active only */
+        .pagination > li > a
+        {
+            background-color: #ffffff !important;
+            border-color: #e5e7eb !important;
+            color: var(--main-theme-color) !important;
+        }
+
         .page-next a,
         .pagination > .active > a:hover,
         .page-item.active,
@@ -624,61 +715,9 @@
         .pagination > li > .active > a:hover,
         .pagination > li > a:hover
         {
-            background-color: var(--main-theme-hover) !important;
-            border-color: var(--btn-theme-hover) !important;
-            color: var(--nav-primary-text-color) !important;
-        }
-
-        .pagination > li > a
-        {
             background-color: var(--main-theme-color) !important;
-            border-color: var(--btn-theme-hover) !important;
-            color: var(--nav-primary-text-color) !important;
-        }
-
-
-        .bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label
-        {
-            color: var(--nav-primary-text-color) !important;
-        }
-
-        .bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label:hover
-        {
-            background-color: var(--main-theme-hover) !important;
-            color: var(--nav-primary-text-color) !important;
-        }
-
-
-        .dropdown-menu,
-        .dropdown-menu > li
-        {
-            background-color: hsl(from var(--main-theme-color) h s calc(l - 5));
-            border-color: hsl(from var(--main-theme-color) h s calc(l - 10));
-            color: var(--nav-primary-text-color) !important;
-        }
-
-        .main-header .navbar .nav>.active>a {
-            background-color: hsl(from var(--main-theme-color) h s calc(l - 5)) !important;
-            color: var(--nav-primary-text-color) !important;
-        }
-
-        .navbar-nav > .notifications-menu > .dropdown-menu > li.header,
-        .navbar-nav > .messages-menu > .dropdown-menu > li.header,
-        .navbar-nav > .tasks-menu > .dropdown-menu > li.header,
-        .navbar-nav > .notifications-menu > .dropdown-menu > li .menu,
-        .navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu,
-        .navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu a:hover,
-        .navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li:hover,
-        .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li:hover > a,
-        .task_menu
-        {
-            background-color: hsl(from var(--main-theme-color) h s calc(l - 5)) !important;
-            color: var(--nav-primary-text-color) !important;
-            margin-bottom: 0;
-        }
-
-        .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
-            border-bottom: 1px solid hsl(from var(--main-theme-color) h s calc(l - 10));
+            border-color: var(--main-theme-color) !important;
+            color: #ffffff !important;
         }
 
 

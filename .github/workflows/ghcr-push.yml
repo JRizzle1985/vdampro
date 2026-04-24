@@ -17,6 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set lowercase owner
+        run: echo "OWNER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -34,7 +37,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/vdampro:latest
-            ghcr.io/${{ github.repository_owner }}/vdampro:${{ github.sha }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/vdampro:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/vdampro:buildcache,mode=max
+            ghcr.io/${{ env.OWNER }}/vdampro:latest
+            ghcr.io/${{ env.OWNER }}/vdampro:${{ github.sha }}
+          cache-from: type=registry,ref=ghcr.io/${{ env.OWNER }}/vdampro:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ env.OWNER }}/vdampro:buildcache,mode=max

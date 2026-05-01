@@ -753,5 +753,9 @@ return [
     ],
 
     'months_plural' => '1 month|:count months',
+    'send_to_label_printer' => 'Send to Label Printer',
+    'chimera_printer' => 'Label Printer (Chimera)',
+    'chimera_test_success' => 'Connection successful',
+    'chimera_test_failed' => 'Connection failed: :error',
 
 ];

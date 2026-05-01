@@ -212,6 +212,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::post('labels', [SettingsController::class, 'postLabels'])
         ->name('settings.labels.save');
 
+    Route::get('printer', [SettingsController::class, 'getChimeraPrinter'])
+        ->name('settings.printer.index')
+        ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')
+            ->push(trans('general.chimera_printer'), route('settings.printer.index')));
+
+    Route::post('printer', [SettingsController::class, 'postChimeraPrinter'])
+        ->name('settings.printer.save');
+
+    Route::post('printer/test', [SettingsController::class, 'testChimeraConnection'])
+        ->name('settings.printer.test');
+
     Route::get('ldap', [SettingsController::class, 'getLdapSettings'])
         ->name('settings.ldap.index')
         ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')

@@ -377,6 +377,8 @@ return [
     'labels_title' => 'Update Label Settings',
     'labels_title_help' => 'Changes made here must be saved before they will be reflected in the labels or the preview below.',
     'labels_help' => 'Barcodes &amp; label settings',
+    'printer_help' => 'Configure the Chimera label printer connection and delivery mode',
+    'printer_title' => 'Update Label Printer Settings',
     'purge_help' => 'Permanently delete soft-deleted records',
     'ldap_extension_warning' => 'It does not look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.',
     'ldap_ad' => 'LDAP/AD',

@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
+use App\Http\Requests\StoreChimeraPrinterSettings;
 use App\Http\Requests\StoreLabelSettings;
 use App\Http\Requests\StoreLdapSettings;
 use App\Http\Requests\StoreLocalizationSettings;
@@ -141,6 +142,77 @@ class SettingsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
+    }
+
+    /**
+     * Show Chimera printer settings.
+     */
+    public function getChimeraPrinter(): View
+    {
+        return view('settings.printer', ['setting' => Setting::getSettings()]);
+    }
+
+    /**
+     * Save Chimera printer settings.
+     */
+    public function postChimeraPrinter(StoreChimeraPrinterSettings $request): RedirectResponse
+    {
+        if (is_null($setting = Setting::getSettings())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->chimera_enabled = $request->boolean('chimera_enabled');
+        $setting->chimera_printer_ip = $request->input('chimera_printer_ip');
+        $setting->chimera_printer_port = $request->input('chimera_printer_port', 1680);
+        $setting->chimera_scripts_path = $request->input('chimera_scripts_path');
+        $setting->chimera_delivery_method = $request->input('chimera_delivery_method', 'tcp');
+        $setting->chimera_qr_prefix = $request->input('chimera_qr_prefix');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.printer.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+    }
+
+    /**
+     * Test the Chimera TCP connection.
+     */
+    public function testChimeraConnection(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'chimera_printer_ip' => 'required|ip',
+            'chimera_printer_port' => 'nullable|integer|min:1|max:65535',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ], 422);
+        }
+
+        $ip = $request->input('chimera_printer_ip');
+        $port = (int) $request->input('chimera_printer_port', 1680);
+        $errno = 0;
+        $errstr = '';
+
+        $socket = @stream_socket_client(sprintf('tcp://%s:%d', $ip, $port), $errno, $errstr, 3);
+
+        if (! $socket) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('general.chimera_test_failed', ['error' => $errstr !== '' ? $errstr : 'unknown error']),
+            ], 422);
+        }
+
+        fclose($socket);
+
+        return response()->json([
+            'success' => true,
+            'message' => trans('general.chimera_test_success'),
+        ]);
     }
 
     /**

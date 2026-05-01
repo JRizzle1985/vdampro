@@ -13,6 +13,7 @@ use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\Statuslabel;
+use App\Services\ChimeraPrintService;
 use App\View\Label;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
@@ -184,6 +185,9 @@ class BulkAssetsController extends Controller
                         ->with('bulkedit', true)
                         ->with('count', 0);
 
+                case 'chimera_print':
+                    return $this->sendToChimeraPrinter($request);
+
                 case 'delete':
                     $this->authorize('delete', Asset::class);
                     $assets->each(function ($assets) {
@@ -213,6 +217,41 @@ class BulkAssetsController extends Controller
         }
 
         return redirect()->back()->with('error', 'No action selected');
+    }
+
+    /**
+     * Send selected assets to the Chimera printer.
+     */
+    public function sendToChimeraPrinter(Request $request): RedirectResponse
+    {
+        $this->authorize('view', Asset::class);
+
+        $settings = Setting::getSettings();
+        $bulk_back_url = $request->session()->pull('bulk_back_url', url()->previous());
+
+        if (! $settings?->chimera_enabled) {
+            return redirect($bulk_back_url)->with('error', trans('general.chimera_printer').' is disabled.');
+        }
+
+        if (! $request->filled('ids') || count($request->input('ids')) === 0) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
+        }
+
+        $assets = Asset::with('company')
+            ->whereIn('id', $request->input('ids'))
+            ->get();
+
+        if ($assets->isEmpty()) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.assets_do_not_exist_or_are_invalid'));
+        }
+
+        $result = (new ChimeraPrintService($settings))->printAssets($assets);
+
+        if (! $result['success']) {
+            return redirect($bulk_back_url)->with('error', $result['message']);
+        }
+
+        return redirect($bulk_back_url)->with('success', $result['message'].' ('.$result['count'].' labels)');
     }
 
     /**

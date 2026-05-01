@@ -765,5 +765,9 @@ return [
 
     'token_unrevoked' => 'API token reinstated',
     'token_revoked' => 'API token revoked',
+    'send_to_label_printer' => 'Send to Label Printer',
+    'chimera_printer' => 'Label Printer (Chimera)',
+    'chimera_test_success' => 'Connection successful',
+    'chimera_test_failed' => 'Connection failed: :error',
 
 ];

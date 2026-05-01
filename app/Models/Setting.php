@@ -65,12 +65,19 @@ class Setting extends Model
         'google_client_id',
         'google_client_secret',
         'manager_view_enabled',
+        'chimera_enabled',
+        'chimera_printer_ip',
+        'chimera_printer_port',
+        'chimera_scripts_path',
+        'chimera_delivery_method',
+        'chimera_qr_prefix',
     ];
 
     protected $casts = [
         'label2_asset_logo' => 'boolean',
         'require_checkinout_notes' => 'boolean',
         'manager_view_enabled' => 'boolean',
+        'chimera_enabled' => 'boolean',
     ];
 
     /**

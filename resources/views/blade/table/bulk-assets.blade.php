@@ -40,7 +40,10 @@
                         <option value="delete">{{ trans('general.bulk_delete') }}</option>
                     @endcan
 
-                    <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
+                    <option value="labels" {{ $snipeSettings->shortcuts_enabled == 1 ? 'accesskey=l' : '' }}>{{ trans_choice('button.generate_labels', 2) }}</option>
+                    @if ($snipeSettings->chimera_enabled)
+                        <option value="chimera_print">{{ trans('general.send_to_label_printer') }}</option>
+                    @endif
                 @endif
             </select>
 

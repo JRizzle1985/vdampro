@@ -30,18 +30,18 @@ class StoreChimeraPrinterSettings extends FormRequest
                 'nullable',
                 'string',
                 'max:255',
-                Rule::re<?php
-
-namespace App\Http\Requests;
-
-use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;ab
-nam"')),
-                '"ip"use Illuminate\Foundation\Http\FormRequest;
-use Ileruse Illuminate\Support\Facades\Gate;
-use Imause Illuminate\Validation\Rule;
-
-cler
-class StoreChimeraPrinterSett   {
-    /**
-     * Determine if the user is authorizeding CODE_OF_CONDUCT.md CONTEXT.md CONTRIBUTING.md CONTRIBUTORS.md Dockerfile Dockerfile.alpine Dockerfile.fpm-alpine LICENSE Procfile README.md SECURITY.md TESTING.md Vagrantfile _config.yml ansible app app.json artisan bootstrap chimera-vdamp-integration-prompt.md composer.json composer.lock config crowdin.yml database dev.docker-compose.yml docker docker-compose.yml docs dokploy.docker-compose.raw.yml dokploy.docker-compose.yml install.sh node_modules pa11y.js package-lock.json package.json phpstan.neon.dist phpstan.neon.example phpunit.xml psalm.xml public resources routes sample_csvs server.php snipeit.sh storage stubs tests upgrade.php webpack.mix.js ansible/ app/ bootstrap/ config/ database/ docker/ docs/ node_modules/ public/ resources/ routes/ sample_csvs/ storage/ stubs/ tests/
+                Rule::requiredIf(fn () => $this->input('chimera_delivery_method', 'tcp') === 'tcp' && $this->boolean('chimera_enabled')),
+                'ip',
+            ],
+            'chimera_printer_port' => 'nullable|integer|min:1|max:65535',
+            'chimera_scripts_path' => [
+                'nullable',
+                'string',
+                'max:255',
+                Rule::requiredIf(fn () => $this->input('chimera_delivery_method') === 'file' && $this->boolean('chimera_enabled')),
+            ],
+            'chimera_delivery_method' => ['required', Rule::in(['tcp', 'file'])],
+            'chimera_qr_prefix' => 'nullable|string|max:255',
+        ];
+    }
+}

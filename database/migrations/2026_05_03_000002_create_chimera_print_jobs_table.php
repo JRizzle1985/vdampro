@@ -29,7 +29,8 @@ return new class extends Migration
         Schema::create('chimera_print_job_assets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chimera_print_job_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('asset_id')->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('asset_id');
+            $table->foreign('asset_id')->references('id')->on('assets')->cascadeOnDelete();
             $table->timestamps();
 
             $table->unique(['chimera_print_job_id', 'asset_id']);

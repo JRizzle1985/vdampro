@@ -6,6 +6,7 @@
 @stop
 
 @section('header_right')
+    <a href="{{ route('settings.printer.jobs') }}" class="btn btn-default">Print Jobs</a>
     <a href="{{ route('settings.index') }}" class="btn btn-primary">{{ trans('general.back') }}</a>
 @stop
 
@@ -84,6 +85,17 @@
                                 <input class="form-control" name="chimera_qr_prefix" type="text" id="chimera_qr_prefix" value="{{ old('chimera_qr_prefix', $setting->chimera_qr_prefix) }}">
                                 {!! $errors->first('chimera_qr_prefix', '<span class="alert-msg">:message</span>') !!}
                                 <p class="help-block">Optional URL or prefix prepended to the asset tag for QR content.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('chimera_template_path') ? ' has-error' : '' }}">
+                            <div class="col-md-3 text-right">
+                                <label for="chimera_template_path" class="control-label">Default Template Path</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input class="form-control" name="chimera_template_path" type="text" id="chimera_template_path" value="{{ old('chimera_template_path', $setting->chimera_template_path) }}" placeholder="/path/to/template.ykr">
+                                {!! $errors->first('chimera_template_path', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">Default Chimera template file path for label jobs. Can be overridden per print job.</p>
                             </div>
                         </div>
 

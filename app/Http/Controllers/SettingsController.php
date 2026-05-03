@@ -167,6 +167,7 @@ class SettingsController extends Controller
         $setting->chimera_scripts_path = $request->input('chimera_scripts_path');
         $setting->chimera_delivery_method = $request->input('chimera_delivery_method', 'tcp');
         $setting->chimera_qr_prefix = $request->input('chimera_qr_prefix');
+        $setting->chimera_template_path = $request->input('chimera_template_path');
 
         if ($setting->save()) {
             return redirect()->route('settings.printer.index')

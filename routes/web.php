@@ -10,6 +10,7 @@ use App\Http\Controllers\BulkCategoriesController;
 use App\Http\Controllers\BulkManufacturersController;
 use App\Http\Controllers\BulkSuppliersController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ChimeraPrintJobController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentsController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\UploadedFilesController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Livewire\Importer;
 use App\Mail\CheckoutComponentMail;
+use App\Models\ChimeraPrintJob;
 use App\Models\ReportTemplate;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -222,6 +224,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     Route::post('printer/test', [SettingsController::class, 'testChimeraConnection'])
         ->name('settings.printer.test');
+
+    Route::get('printer/jobs', [ChimeraPrintJobController::class, 'index'])
+        ->name('settings.printer.jobs')
+        ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')
+            ->push(trans('general.chimera_printer'), route('settings.printer.index'))
+            ->push('Print Jobs', route('settings.printer.jobs')));
+
+    Route::get('printer/jobs/{chimeraPrintJob}', [ChimeraPrintJobController::class, 'show'])
+        ->name('settings.printer.jobs.show')
+        ->breadcrumbs(fn (Trail $trail, ChimeraPrintJob $chimeraPrintJob) => $trail->parent('settings.printer.jobs')
+            ->push('#'.$chimeraPrintJob->id, route('settings.printer.jobs.show', $chimeraPrintJob)));
 
     Route::get('ldap', [SettingsController::class, 'getLdapSettings'])
         ->name('settings.ldap.index')

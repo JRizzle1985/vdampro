@@ -42,6 +42,7 @@ class StoreChimeraPrinterSettings extends FormRequest
             ],
             'chimera_delivery_method' => ['required', Rule::in(['tcp', 'file'])],
             'chimera_qr_prefix' => 'nullable|string|max:255',
+            'chimera_template_path' => 'nullable|string|max:500',
         ];
     }
 }

@@ -71,6 +71,7 @@ class Setting extends Model
         'chimera_scripts_path',
         'chimera_delivery_method',
         'chimera_qr_prefix',
+        'chimera_template_path',
     ];
 
     protected $casts = [

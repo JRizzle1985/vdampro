@@ -245,13 +245,35 @@ class BulkAssetsController extends Controller
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.assets_do_not_exist_or_are_invalid'));
         }
 
-        $result = (new ChimeraPrintService($settings))->printAssets($assets);
+        $templateOverride = $request->input('chimera_template_path');
+        $service = new ChimeraPrintService($settings);
+        
+        if ($templateOverride) {
+            $service->setTemplateOverride($templateOverride);
+        }
+
+        $result = $service->printAssets($assets);
+
+        $job = new \App\Models\ChimeraPrintJob();
+        $job->user_id = auth()->id();
+        $job->status = $result['success'] ? 'completed' : 'failed';
+        $job->delivery_method = $result['delivery_method'] ?? 'tcp';
+        $job->target_host = $result['target_host'] ?? null;
+        $job->target_port = $result['target_port'] ?? null;
+        $job->target_path = $result['target_path'] ?? null;
+        $job->template_path = $result['template_path'] ?? null;
+        $job->payload = $result['payload'] ?? null;
+        $job->asset_count = $result['count'] ?? 0;
+        $job->result_message = $result['message'] ?? null;
+        $job->save();
+
+        $job->assets()->attach($assets->pluck('id'));
 
         if (! $result['success']) {
             return redirect($bulk_back_url)->with('error', $result['message']);
         }
 
-        return redirect($bulk_back_url)->with('success', $result['message'].' ('.$result['count'].' labels)');
+        return redirect($bulk_back_url)->with('success', $result['message'].' ('.$result['count'].' labels)')->with('chimera_job_id', $job->id);
     }
 
     /**

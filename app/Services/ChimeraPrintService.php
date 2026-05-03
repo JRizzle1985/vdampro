@@ -10,33 +10,61 @@ class ChimeraPrintService
 {
     protected Setting $settings;
 
+    protected ?string $templateOverride = null;
+
     public function __construct(?Setting $settings = null)
     {
         $this->settings = $settings ?? Setting::getSettings();
     }
 
+    public function setTemplateOverride(?string $templatePath): self
+    {
+        $this->templateOverride = $templatePath;
+
+        return $this;
+    }
+
+    public function getTemplatePath(): ?string
+    {
+        return $this->templateOverride ?? $this->settings->chimera_template_path;
+    }
+
     /**
      * Send a collection of assets to the Chimera print controller.
      *
-     * @return array{success: bool, message: string, count: int}
+     * @return array{success: bool, message: string, count: int, payload: string, template_path: ?string, target_host: ?string, target_port: ?int, target_path: ?string, delivery_method: string}
      */
     public function printAssets(Collection $assets): array
     {
         if (! $this->settings->chimera_enabled) {
-            return ['success' => false, 'message' => 'Chimera printer is disabled.', 'count' => 0];
+            return ['success' => false, 'message' => 'Chimera printer is disabled.', 'count' => 0, 'payload' => '', 'template_path' => null, 'target_host' => null, 'target_port' => null, 'target_path' => null, 'delivery_method' => 'tcp'];
         }
 
         if ($assets->isEmpty()) {
-            return ['success' => false, 'message' => 'No assets were selected.', 'count' => 0];
+            return ['success' => false, 'message' => 'No assets were selected.', 'count' => 0, 'payload' => '', 'template_path' => null, 'target_host' => null, 'target_port' => null, 'target_path' => null, 'delivery_method' => 'tcp'];
         }
 
         $lines = $assets->map(fn (Asset $asset) => $this->formatLine($asset))->all();
+        $payload = implode(PHP_EOL, $lines);
 
         $result = $this->settings->chimera_delivery_method === 'file'
             ? $this->deliverViaFile($lines)
             : $this->deliverViaTcp($lines);
 
         $result['count'] = count($lines);
+        $result['payload'] = $payload;
+        $result['template_path'] = $this->getTemplatePath();
+        $result['delivery_method'] = $this->settings->chimera_delivery_method;
+
+        if ($this->settings->chimera_delivery_method === 'tcp') {
+            $result['target_host'] = (string) $this->settings->chimera_printer_ip;
+            $result['target_port'] = (int) ($this->settings->chimera_printer_port ?: 1680);
+            $result['target_path'] = null;
+        } else {
+            $result['target_host'] = null;
+            $result['target_port'] = null;
+            $result['target_path'] = trim((string) $this->settings->chimera_scripts_path);
+        }
 
         return $result;
     }

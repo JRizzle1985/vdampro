@@ -1,61 +1,51 @@
-# Save
+# Session Save — Public Scan Verification Implementation
+
+This file tracks the implementation of the public asset scan verification page with scan counts and premium competitor layout features.
+
+---
 
 ## Current State
 
-- Chimera label-printer integration is implemented and committed.
-- Git commit: `37876dccd5`
-- Commit message: `Add Chimera printer integration and bulk print flow`
-- Changes have been pushed to `origin/master`.
+- **Feature Implementation**: Done, tested for syntax and layout structure, and pushed to remote.
+- **Git Commit**: `ec4a2ea9a9`
+- **Commit Message**: `Add public scan verification page, scan count, and leaflet downloads`
+- **Remote Branch**: `origin/master`
+- **Target Host URL**: `https://vdot.veridot.co.za/`
 
-## VDOT Custom Build
+---
 
-- Dokploy project: `VDOT Custom Build`
-- Deployment type: Dokploy compose stack
-- Stack name: `vdot`
-- Laravel runs in the `app` service.
-- Production migration check is complete.
-- `php artisan migrate --force` returned `Nothing to migrate`.
-- `php artisan migrate:status` confirms `2026_05_01_120000_add_chimera_settings_to_settings_table` is `Ran`.
-- App and DB containers are healthy.
+## File Summary — New and Modified Files
 
-## Raw Compose Notes
+| File | Status | Purpose |
+|---|---|---|
+| `database/migrations/2026_07_02_160000_add_scan_count_to_assets_table.php` | **New** | Adds `scan_count` column to the `assets` table. |
+| `app/Http/Controllers/PublicAssetController.php` | **New** | Handles public scanning request, increments scan counts, maps dynamic custom fields, manages localized views, and serves public file downloads. |
+| `routes/web/hardware.php` | **Modified** | Re-routes the public verification prefix (`ht/{tag}`) to the new controller and registers the public leaflet download route. |
+| `resources/views/public/verify.blade.php` | **New** | Premium Blade view based on competitor layout (verified banner, collapsible fields, PDF leaflet viewer, scan count, and language toggles). |
+| `resources/views/public/verify-error.blade.php` | **New** | Clean error page for scanned invalid verification tags. |
+| `resources/lang/en-US/general.php` | **Modified** | English translation key-value mappings for the verification interface. |
+| `resources/lang/hi-IN/general.php` | **Modified** | Hindi translation key-value mappings for the verification interface. |
+| `public/img/medication_grid.png` | **New** | Premium placeholder medication image grid for verification fallback display. |
 
-- Raw Dokploy deployments use `dokploy.docker-compose.raw.yml`.
-- The raw compose app image is currently `ghcr.io/jrizzle1985/vdampro:latest`.
-- This repo publishes GHCR images from `.github/workflows/ghcr-push.yml`.
-- That workflow runs on push to `master` and also supports manual dispatch.
-- Published tags include:
-  - `ghcr.io/jrizzle1985/vdampro:latest`
-  - `ghcr.io/jrizzle1985/vdampro:${github.sha}`
+---
 
-## Recommended Raw Compose Rollout
+## Next Steps: Deployment & Server Execution
 
-1. Confirm the GHCR workflow completed for commit `37876dccd5`.
-2. In Dokploy raw compose, pin the app image to:
+To roll out the verification page to the staging/production server on Dokploy:
 
-```yaml
-services:
-  app:
-    image: ghcr.io/jrizzle1985/vdampro:37876dccd5
-```
-
-3. Redeploy the raw compose stack.
-4. Run the migration in the app container:
-
-```bash
-php artisan migrate --force
-```
-
-5. Verify migration status:
-
-```bash
-php artisan migrate:status
-```
-
-6. Open admin settings and confirm `Label Printer (Chimera)` is visible.
-7. Enable Chimera and test the connection.
-
-## Important Limitation
-
-- The available Dokploy MCP tools in this session can inspect metadata and redeploy applications, but they do not expose remote shell or compose exec access.
-- Any artisan command on Dokploy compose stacks must be run through direct VPS or container access.
+1. **Verify Dokploy build** has pulled and built from commit `ec4a2ea9a9` on the `master` branch.
+2. **Run Database Migrations** inside the `app` container on the server VPS:
+   ```bash
+   php artisan migrate --force
+   ```
+   *(Alternatively, run `docker exec -it vdot-app-1 php artisan migrate --force` depending on container name)*
+3. **Verify Migration Status**:
+   ```bash
+   php artisan migrate:status
+   ```
+   Confirm `2026_07_02_160000_add_scan_count_to_assets_table` status is `Ran`.
+4. **Test the Public Scan Feature**:
+   - Access: `https://vdot.veridot.co.za/ht/{asset_tag}` (replace `{asset_tag}` with a valid asset tag, e.g. `TEST-DRUG-123`).
+   - Check that refreshing the page increments the "Authentication Count" (scan count).
+   - Check that Hindi translation updates the field labels instantly when **हिन्दी** is clicked.
+   - Attach a PDF file to the asset in the admin view and check that **View e-Leaflet** displays it publicly.

@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (!Schema::hasTable('chimera_print_jobs')) {
         Schema::create('chimera_print_jobs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
@@ -25,7 +26,9 @@ return new class extends Migration
             $table->index('status');
             $table->index('created_at');
         });
+        }
 
+        if (!Schema::hasTable('chimera_print_job_assets')) {
         Schema::create('chimera_print_job_assets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chimera_print_job_id')->constrained()->cascadeOnDelete();
@@ -35,6 +38,7 @@ return new class extends Migration
 
             $table->unique(['chimera_print_job_id', 'asset_id']);
         });
+        }
     }
 
     public function down(): void

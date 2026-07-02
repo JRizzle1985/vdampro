@@ -753,5 +753,24 @@ return [
     ],
 
     'months_plural' => '1 month|:count months',
-
+    'verification' => [
+        'verified' => 'सत्यापित',
+        'medication_name' => 'दवा का नाम',
+        'brand_name' => 'ब्रांड का नाम',
+        'expiry_date' => 'समाप्ति तिथि',
+        'batch_number' => 'बैच संख्या',
+        'manufacturer' => 'निर्माता',
+        'manufacturing_date' => 'उत्पादन तिथि',
+        'license_number' => 'लाइसेंस संख्या',
+        'product_id' => 'उत्पाद आईडी',
+        'serial_number' => 'क्रम संख्या',
+        'authentication_count' => 'प्रमाणीकरण गणना',
+        'show_more' => 'अधिक दिखाएं',
+        'show_less' => 'कम दिखाएं',
+        'view_eleaflet' => 'ई-पत्रक देखें',
+        'admin_details' => 'एडमिन विवरण',
+        'admin_login' => 'एडमिन लॉगिन',
+        'not_found' => 'उत्पाद नहीं मिला',
+        'not_found_desc' => 'उत्पाद सत्यापन टैग की पहचान नहीं की जा सकी या यह अमान्य है। कृपया कोड की जांच करें और पुनः स्कैन करें।',
+    ],
 ];

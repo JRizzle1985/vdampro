@@ -189,7 +189,5 @@ Route::resource('maintenances',
     ['middleware' => ['auth']
     ])->parameters(['maintenance' => 'maintenance', 'asset' => 'asset_id']);
 
-Route::get('ht/{any?}',
-    [AssetsController::class, 'getAssetByTag'])
-    ->where('any', '.*')
-    ->name('ht/assetTag');
+Route::get('ht/{tag}', [App\Http\Controllers\PublicAssetController::class, 'show'])->name('ht/assetTag');
+Route::get('public/asset/{tag}/leaflet/{file_id}', [App\Http\Controllers\PublicAssetController::class, 'downloadLeaflet'])->name('public.asset.leaflet');

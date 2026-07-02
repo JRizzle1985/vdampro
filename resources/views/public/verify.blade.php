@@ -259,39 +259,6 @@
             object-fit: cover;
         }
 
-        /* Language Switcher Footer */
-        .language-switcher {
-            width: 100%;
-            max-width: 500px;
-            background-color: #f1f5f9;
-            border-radius: 14px;
-            padding: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-
-        .lang-link {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border-radius: 10px;
-            transition: var(--transition);
-        }
-
-        .lang-link.active {
-            background-color: #ffffff;
-            color: var(--text-primary);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            font-weight: 600;
-        }
-
         /* Keyframe Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
@@ -351,7 +318,7 @@
                 <i class="fa-solid fa-check"></i>
             </div>
             <div class="verified-title">{{ trans('general.verification.verified') }}</div>
-            <div class="verified-subtitle">{{ app()->getLocale() == 'hi-IN' ? 'सत्यापित' : 'Authentication Successful' }}</div>
+            <div class="verified-subtitle">Authentication Successful</div>
         </div>
 
         <!-- Info field List -->
@@ -441,12 +408,6 @@
                 </button>
             @endif
         </div>
-    </div>
-
-    <!-- Language Selector Footer -->
-    <div class="language-switcher">
-        <a href="?locale=en" class="lang-link {{ app()->getLocale() == 'en-US' ? 'active' : '' }}">English</a>
-        <a href="?locale=hi" class="lang-link {{ app()->getLocale() == 'hi-IN' ? 'active' : '' }}">हिन्दी</a>
     </div>
 
     <script>

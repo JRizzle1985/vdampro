@@ -21,17 +21,6 @@ class PublicAssetController extends Controller
      */
     public function show(Request $request, $tag)
     {
-        if ($request->has('locale')) {
-            $locale = $request->input('locale');
-            if (in_array($locale, ['en', 'hi', 'en-US', 'hi-IN'])) {
-                $mappedLocale = ($locale === 'hi') ? 'hi-IN' : (($locale === 'en') ? 'en-US' : $locale);
-                app()->setLocale($mappedLocale);
-                session(['public_locale' => $mappedLocale]);
-            }
-        } elseif (session()->has('public_locale')) {
-            app()->setLocale(session('public_locale'));
-        }
-
         // Search for an exact and unique asset tag match
         $asset = Asset::with(['model.manufacturer', 'supplier', 'model.fieldset'])
             ->where('asset_tag', '=', $tag)

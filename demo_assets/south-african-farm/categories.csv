@@ -1,0 +1,11 @@
+Name,Tag Color,EULA,Use Default EULA,Require Acceptance,Alert on Response,Category Type,Send Checkin Email,Notes
+Machinery - Tractors,#2f6f3e,,,false,false,asset,false,Primary tractors and tractor units
+Machinery - Implements,#6b8e23,,,false,false,asset,false,Tillage planting spraying and harvesting implements
+Vehicles - Farm,#1f4e79,,,false,false,asset,false,Farm utility vehicles and off-road vehicles
+Irrigation and Water,#168aad,,,false,false,asset,false,Borehole pumping storage and irrigation equipment
+Workshop and Power,#6c757d,,,false,false,asset,false,Workshop electrical and backup-power equipment
+Livestock - Cattle,#8b4513,,,false,false,asset,false,Individually tracked cattle
+Livestock - Sheep,#b08968,,,false,false,asset,false,Individually tracked sheep
+Livestock Equipment,#9c6644,,,false,false,asset,false,Handling weighing and identification equipment
+Farm Infrastructure,#495057,,,false,false,asset,false,Fixed farm infrastructure and monitoring equipment
+Storage and Handling,#bc6c25,,,false,false,asset,false,Grain feed and materials handling equipment

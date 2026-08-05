@@ -1,0 +1,24 @@
+Name,Model Number,Minimum Amount,Manufacturer,Category,Require Serial,Depreciation,EOL,Notes,Fieldset,Requestable
+John Deere 6135B,6135B,1,John Deere,Machinery - Tractors,true,,120,135 hp row-crop tractor,,false
+Massey Ferguson 5711,5711,1,Massey Ferguson,Machinery - Tractors,true,,120,110 hp utility tractor,,false
+New Holland TT4.75,TT4.75,1,New Holland,Machinery - Tractors,true,,120,75 hp utility tractor,,false
+Kuhn 3m Disc Harrow,DISC-3000,1,Kuhn,Machinery - Implements,true,,96,Mounted disc harrow,,false
+Kuhn 4-Row Planter,PLANT-4R,1,Kuhn,Machinery - Implements,true,,96,Four-row planter,,false
+Jacto 600L Boom Sprayer,600L-BOOM,1,Jacto,Machinery - Implements,true,,84,Tractor-mounted crop sprayer,,false
+Ocmis R18 Irrigator,R18,1,Ocmis,Machinery - Implements,true,,96,Travelling irrigation reel,,false
+Claas Rollant Baler,ROLLANT-455,1,Claas,Machinery - Implements,true,,120,Round baler,,false
+Toyota Hilux 2.4 GD-6,2.4-GD6,1,Toyota,Vehicles - Farm,true,,84,Double-cab farm utility vehicle,,false
+Isuzu D-Max 3.0,3.0-DMAX,1,Isuzu,Vehicles - Farm,true,,84,Single-cab farm utility vehicle,,false
+Polaris Ranger 1000,RANGER-1000,1,Polaris,Vehicles - Farm,true,,72,Off-road utility vehicle,,false
+Honda 7kVA Diesel Generator,EG7000,1,Honda,Workshop and Power,true,,84,Backup generator,,false
+Grundfos SQFlex Borehole Pump,SQFLEX-11,1,Grundfos,Irrigation and Water,true,,96,Solar-compatible borehole pump,,false
+Fronius TransSteel 3500,TRANSSTEEL-3500,1,Fronius,Workshop and Power,true,,84,Workshop MIG welder,,false
+Gallagher TWR-5 Electric Fence Energizer,TWR-5,1,Gallagher,Farm Infrastructure,true,,72,Electric fence energizer,,false
+Tru-Test XR5000 Livestock Scale,XR5000,1,Tru-Test,Livestock Equipment,true,,72,Portable livestock weighing indicator,,false
+Priefert Cattle Handling Crush,PRIEFERT-CRUSH,1,Priefert,Livestock Equipment,true,,120,Cattle handling crush,,false
+Bonsmara Breeding Cow,BR-COW,1,Klipfontein Farm Genetics,Livestock - Cattle,true,,96,Adult breeding cow; use asset tag as visual herd ID,,false
+Bonsmara Breeding Bull,BR-BULL,1,Klipfontein Farm Genetics,Livestock - Cattle,true,,96,Registered breeding bull; use asset tag as visual herd ID,,false
+Merino Ewe,MER-EWE,1,Klipfontein Farm Genetics,Livestock - Sheep,true,,72,Breeding ewe; use asset tag as visual flock ID,,false
+Dorper Ram,DOR-RAM,1,Klipfontein Farm Genetics,Livestock - Sheep,true,,72,Breeding ram; use asset tag as visual flock ID,,false
+SiloKing 20T Grain Hopper,20T-HOPPER,1,SiloKing,Storage and Handling,true,,120,Mobile grain hopper,,false
+Klipfontein 5000L Water Tank,5000L-TANK,1,Klipfontein Fabrication,Irrigation and Water,true,,120,Poly water tank on fabricated stand,,false

@@ -442,6 +442,16 @@
             <x-box class="side-box expanded">
                 <x-info-panel :infoPanelObj="$asset" img_path="{{ app('assets_upload_url') }}">
                     <x-slot:buttons>
+                        @if (Illuminate\Support\Str::startsWith($asset->asset_tag, 'KMF-'))
+                            <a href="https://radarfe.ocmo.co.za/demo/farm-operations-cd43bc983a51b2ea?asset={{ urlencode($asset->asset_tag) }}"
+                               class="btn btn-primary btn-block mb-3 hidden-print"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               title="Open this asset in the RadarEye farm operations demo">
+                                <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                                Open in RadarEye demo
+                            </a>
+                        @endif
                         <x-button.checkout permission="checkout" :item="$asset" :route="route('hardware.checkout.create', $asset->id)"/>
                         <x-button.checkin permission="checkin" :item="$asset" :route="route('hardware.checkin.create', $asset->id)"/>
                         <x-button.edit :item="$asset" :route="route('hardware.edit', $asset->id)"/>

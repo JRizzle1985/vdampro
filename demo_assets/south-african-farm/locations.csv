@@ -1,0 +1,13 @@
+name,company,address,address2,city,state,country,zip,notes,phone,fax,currency,tag color
+Main Farm Yard,,R30 Farm Road,,Bloemfontein,Free State,ZA,9301,Central equipment staging and dispatch area,,,ZAR,#2f6f3e
+Tractor Shed,,R30 Farm Road,,Bloemfontein,Free State,ZA,9301,Secure tractor storage and daily inspections,,,ZAR,#367c2b
+Workshop,,R30 Farm Road,,Bloemfontein,Free State,ZA,9301,Mechanical repairs welding and parts,,,ZAR,#6c757d
+Cattle Handling Kraal,,North Camp Road,,Bloemfontein,Free State,ZA,9301,Cattle loading dipping weighing and treatment area,,,ZAR,#8b4513
+Sheep Camp,,South Camp Road,,Bloemfontein,Free State,ZA,9301,Sheep handling and overnight holding area,,,ZAR,#b08968
+North Camps,,North Camp Road,,Bloemfontein,Free State,ZA,9301,North grazing camps,,,ZAR,#6b8e23
+South Camps,,South Camp Road,,Bloemfontein,Free State,ZA,9301,South grazing camps,,,ZAR,#6b8e23
+Borehole 1,,North Camp Road,,Bloemfontein,Free State,ZA,9301,Primary borehole and pump installation,,,ZAR,#168aad
+Irrigation Dam,,East Boundary Road,,Bloemfontein,Free State,ZA,9301,Water storage and irrigation intake,,,ZAR,#168aad
+Grain Store,,R30 Farm Road,,Bloemfontein,Free State,ZA,9301,Grain and seed storage,,,ZAR,#bc6c25
+Fuel Store,,R30 Farm Road,,Bloemfontein,Free State,ZA,9301,Diesel and lubricants storage,,,ZAR,#495057
+Admin Office,,R30 Farm Road,,Bloemfontein,Free State,ZA,9301,Farm administration and records,,,ZAR,#1f4e79

@@ -50,4 +50,10 @@ return [
         'maps_api_key' => env('GOOGLE_MAPS_API'),
     ],
 
+    'radareye' => [
+        'enroll_url' => env('RADAREYE_ENROLL_URL'),
+        'hmac_key' => env('RADAREYE_ENROLL_HMAC_KEY'),
+        'ticket_ttl' => (int) env('RADAREYE_ENROLL_TTL', 900),
+    ],
+
 ];

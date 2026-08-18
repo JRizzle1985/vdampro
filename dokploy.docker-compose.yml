@@ -92,6 +92,9 @@ services:
       REDIS_HOST: ${REDIS_HOST:-null}
       REDIS_PASSWORD: ${REDIS_PASSWORD:-null}
       REDIS_PORT: ${REDIS_PORT:-null}
+      RADAREYE_ENROLL_URL: ${RADAREYE_ENROLL_URL:-}
+      RADAREYE_ENROLL_HMAC_KEY: ${RADAREYE_ENROLL_HMAC_KEY:-}
+      RADAREYE_ENROLL_TTL: ${RADAREYE_ENROLL_TTL:-900}
     networks:
       - dokploy-network
       - internal

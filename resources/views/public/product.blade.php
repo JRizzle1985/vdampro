@@ -1,120 +1,70 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light">
-    <meta name="theme-color" content="#12352f">
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light"><meta name="theme-color" content="#173bd4">
     <meta name="description" content="Verified product information for {{ $productName }}.">
-    <title>{{ $productName }} — Product information</title>
+    <title>{{ $productName }} — Verified product record</title>
     <link rel="stylesheet" href="/css/public-product.css">
 </head>
 <body>
 <!--
-THESIS: A product passport that puts identity and safety before promotion; it refuses the generic card-grid catalogue.
-OWN-WORLD: Deep evergreen ink, mineral paper, citrus safety signals, ruled disclosure rows, and one continuous reading rail.
-STORY: Identify the product, see urgent disclosures, navigate the controlled facts, and confirm provenance.
-FIRST VIEWPORT: Product image left or above, identity at full scale, verified-source seal and safety summary visible before the fold.
-FORM: Mobile product passport, grounded structure five, seed 434914f1.
+THESIS: The product record is a living public dossier, not a generic catalogue card.
+OWN-WORLD: Electric cobalt, carbon ink, signal lime, oversized grotesk type, and disciplined ledger rules.
+STORY: Recognise the product, verify its source and scan activity, then read every approved disclosure by subject.
+FIRST VIEWPORT: A cobalt identity field carries the name at monumental scale, with packaging beside a live verification ledger.
+FORM: Controlled product dossier, grounded direction five, seed 2ecf32e3.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 -->
-<header class="site-header">
-    <div class="wordmark" aria-label="VDOT Product Information">
-        <span class="wordmark-mark" aria-hidden="true">V</span>
-        <span>Product information</span>
-    </div>
-    <span class="source-status">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.5 12 3 3 6-7"/><circle cx="12" cy="12" r="9"/></svg>
-        VDOT source
-    </span>
+<header class="masthead">
+    <a class="brand-lockup" href="#product-record" aria-label="VDOT verified product record"><span class="brand-symbol" aria-hidden="true">V</span><span>VDOT <b>Public Record</b></span></a>
+    <span class="live-source"><i aria-hidden="true"></i> Verified source</span>
 </header>
-
-<main>
-    <section class="product-identity" aria-labelledby="product-title">
-        <div class="product-visual{{ $imagePath ? '' : ' product-visual--empty' }}">
+<main id="product-record">
+    <section class="hero" aria-labelledby="product-title">
+        <div class="hero-copy">
+            @if($brandName)<p class="brand-name">{{ $brandName }}</p>@endif
+            <h1 id="product-title">{{ $productName }}</h1>
+            <p class="hero-summary">A verified public product record supplied from the controlled VDOT source.</p>
+            <dl class="hero-meta">
+                @if($categoryName)<div><dt>Type</dt><dd>{{ $categoryName }}</dd></div>@endif
+                @if($companyName)<div><dt>Responsible company</dt><dd>{{ $companyName }}</dd></div>@endif
+            </dl>
+        </div>
+        <div class="product-stage{{ $imagePath ? '' : ' product-stage--empty' }}">
+            <span class="stage-orbit" aria-hidden="true"></span>
             @if($imagePath)
                 <img src="{{ $imagePath }}" alt="{{ $productName }} product packaging" width="720" height="720">
             @else
-                <span aria-hidden="true">{{ mb_strtoupper(mb_substr($productName, 0, 1)) }}</span>
-                <p>Product image not supplied</p>
+                <span class="product-monogram" aria-hidden="true">{{ mb_strtoupper(mb_substr($productName, 0, 1)) }}</span><p>Packaging image pending</p>
             @endif
-        </div>
-
-        <div class="product-heading">
-            @if($brandName)
-                <p class="brand-name">{{ $brandName }}</p>
-            @endif
-            <h1 id="product-title">{{ $productName }}</h1>
-            <dl class="identity-facts">
-                @if($categoryName)
-                    <div><dt>Category</dt><dd>{{ $categoryName }}</dd></div>
-                @endif
-                @if($companyName)
-                    <div><dt>Responsible company</dt><dd>{{ $companyName }}</dd></div>
-                @endif
-                <div><dt>Unit reference</dt><dd>{{ $asset->asset_tag }}</dd></div>
-            </dl>
-            <div class="verification-note">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.5 12 3 3 6-7"/><circle cx="12" cy="12" r="9"/></svg>
-                <div>
-                    <strong>Published from the controlled VDOT record</strong>
-                    <span>Information updated {{ $updatedAt?->format('d M Y') ?: 'recently' }}</span>
-                </div>
-            </div>
         </div>
     </section>
-
+    <section class="record-ledger" aria-label="Record verification">
+        <div class="ledger-lead"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.5 12 3 3 6-7"/><circle cx="12" cy="12" r="9"/></svg><div><strong>Source verified</strong><span>Published from a controlled VDOT record</span></div></div>
+        <dl>
+            <div><dt>Public scans</dt><dd>{{ number_format($scanCount) }}</dd></div>
+            <div><dt>Last updated</dt><dd>{{ $updatedAt?->format('d M Y') ?: 'Recently' }}</dd></div>
+            <div><dt>Unit reference</dt><dd>{{ $asset->asset_tag }}</dd></div>
+        </dl>
+    </section>
     @if(isset($sections['allergens']))
-        <section class="safety-summary" aria-labelledby="safety-title">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg>
-            <div>
-                <h2 id="safety-title">Allergens and warnings</h2>
-                @foreach($sections['allergens']['fields'] as $field)
-                    <p><strong>{{ $field['name'] }}:</strong> {{ $field['value'] }}</p>
-                @endforeach
-            </div>
-        </section>
+        <section class="safety-alert" aria-labelledby="safety-title"><span class="safety-icon" aria-hidden="true">!</span><div><h2 id="safety-title">Read before use</h2>@foreach($sections['allergens']['fields'] as $field)<p><strong>{{ $field['name'] }}</strong> {{ $field['value'] }}</p>@endforeach</div></section>
     @endif
-
     @if(count($sections) > 0)
-        <nav class="section-rail" aria-label="Product information sections">
-            @foreach($sections as $sectionKey => $section)
-                <a href="#section-{{ $sectionKey }}">{{ $section['label'] }}</a>
-            @endforeach
-        </nav>
-
+        <nav class="section-rail" aria-label="Product information sections"><span>In this record</span><div>@foreach($sections as $sectionKey => $section)<a href="#section-{{ $sectionKey }}">{{ $section['label'] }}</a>@endforeach</div></nav>
         <div class="disclosure-sections">
             @foreach($sections as $sectionKey => $section)
                 <section id="section-{{ $sectionKey }}" class="disclosure-section" aria-labelledby="heading-{{ $sectionKey }}">
-                    <h2 id="heading-{{ $sectionKey }}">{{ $section['label'] }}</h2>
-                    <dl>
-                        @foreach($section['fields'] as $field)
-                            <div>
-                                <dt>{{ $field['name'] }}</dt>
-                                <dd>
-                                    @if($field['url'])
-                                        <a href="{{ $field['url'] }}" rel="nofollow noopener noreferrer">{{ $field['value'] }}</a>
-                                    @else
-                                        {!! nl2br(e($field['value'])) !!}
-                                    @endif
-                                </dd>
-                            </div>
-                        @endforeach
-                    </dl>
+                    <header><h2 id="heading-{{ $sectionKey }}">{{ $section['label'] }}</h2></header>
+                    <dl>@foreach($section['fields'] as $field)<div><dt>{{ $field['name'] }}</dt><dd>@if($field['url'])<a href="{{ $field['url'] }}" rel="nofollow noopener noreferrer">{{ $field['value'] }}</a>@else{!! nl2br(e($field['value'])) !!}@endif</dd></div>@endforeach</dl>
                 </section>
             @endforeach
         </div>
     @else
-        <section class="empty-disclosure" aria-labelledby="empty-title">
-            <h2 id="empty-title">Product details are being prepared</h2>
-            <p>The product identity is verified, but no additional information has been approved for public display yet.</p>
-        </section>
+        <section class="empty-disclosure" aria-labelledby="empty-title"><h2 id="empty-title">Product details are being prepared</h2><p>The product identity is verified, but no additional information has been approved for public display yet.</p></section>
     @endif
 </main>
-
-<footer>
-    <p>Information is supplied by the responsible company from its VDOT record. Always follow the physical package and professional medical advice where applicable.</p>
-    <p class="footer-reference">Reference {{ $asset->asset_tag }}</p>
-</footer>
+<footer><div class="footer-brand"><span class="brand-symbol" aria-hidden="true">V</span><strong>Verified by VDOT</strong></div><p>Information is supplied by the responsible company from its controlled product record. Always follow the physical package and professional medical advice where applicable.</p><a href="#product-record">Back to top</a></footer>
 </body>
 </html>

@@ -70,6 +70,7 @@ class PublicProductController extends Controller
             'imagePath' => $this->productImagePath($asset),
             'sections' => $sections,
             'updatedAt' => collect([$asset->updated_at, $asset->model?->updated_at])->filter()->max(),
+            'scanCount' => (int) $asset->scan_count,
         ]);
     }
 

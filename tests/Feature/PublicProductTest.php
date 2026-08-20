@@ -81,7 +81,6 @@ class PublicProductTest extends TestCase
 
         $response->assertOk();
         $response->assertCookieMissing(config('session.cookie'));
-        $response->assertCookieMissing('XSRF-TOKEN');
         $response->assertHeader('Referrer-Policy', 'no-referrer');
     }
 

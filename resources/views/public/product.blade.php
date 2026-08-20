@@ -17,8 +17,8 @@ FORM: Controlled product dossier, grounded direction five, seed 2ecf32e3.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 -->
 <header class="masthead">
-    <a class="brand-lockup" href="#product-record" aria-label="VDOT verified product record"><span class="brand-symbol" aria-hidden="true">V</span><span>VDOT <b>Public Record</b></span></a>
-    <span class="live-source"><i aria-hidden="true"></i> Verified source</span>
+    <a class="brand-lockup" href="#product-record" aria-label="Veridot verified product record">@if($brandLogoPath)<img src="{{ $brandLogoPath }}" alt="Veridot" width="195" height="48">@else<span class="brand-wordmark">VERIDOT</span>@endif<span>Public Record</span></a>
+    <div class="masthead-actions"><span class="live-source"><i aria-hidden="true"></i> Verified source</span><a class="vdot-login" href="{{ $vdotUrl }}">View in VDOT <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4h9v9M16 4 6 14M4 7v9h9"/></svg></a></div>
 </header>
 <main id="product-record">
     <section class="hero" aria-labelledby="product-title">
@@ -34,7 +34,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <div class="product-stage{{ $imagePath ? '' : ' product-stage--empty' }}">
             <span class="stage-orbit" aria-hidden="true"></span>
             @if($imagePath)
-                <img src="{{ $imagePath }}" alt="{{ $productName }} product packaging" width="720" height="720">
+                <img src="{{ $imagePath }}" alt="{{ $productName }} product packaging" width="720" height="720" decoding="async" fetchpriority="high">
             @else
                 <span class="product-monogram" aria-hidden="true">{{ mb_strtoupper(mb_substr($productName, 0, 1)) }}</span><p>Packaging image pending</p>
             @endif
@@ -65,6 +65,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <section class="empty-disclosure" aria-labelledby="empty-title"><h2 id="empty-title">Product details are being prepared</h2><p>The product identity is verified, but no additional information has been approved for public display yet.</p></section>
     @endif
 </main>
-<footer><div class="footer-brand"><span class="brand-symbol" aria-hidden="true">V</span><strong>Verified by VDOT</strong></div><p>Information is supplied by the responsible company from its controlled product record. Always follow the physical package and professional medical advice where applicable.</p><a href="#product-record">Back to top</a></footer>
+<footer><div class="footer-brand">@if($brandLogoPath)<img src="{{ $brandLogoPath }}" alt="" width="195" height="48">@endif<strong>Verified by VDOT</strong></div><p>Information is supplied by the responsible company from its controlled product record. Always follow the physical package and professional medical advice where applicable.</p><a href="#product-record">Back to top</a></footer>
 </body>
 </html>

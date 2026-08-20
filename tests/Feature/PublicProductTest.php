@@ -84,6 +84,16 @@ class PublicProductTest extends TestCase
         $response->assertHeader('Referrer-Policy', 'no-referrer');
     }
 
+    public function test_public_page_links_authorised_users_to_the_matching_vdot_record(): void
+    {
+        [$asset] = $this->makePublishedProduct();
+
+        $this->get($this->publicUrl($asset->asset_tag))
+            ->assertOk()
+            ->assertSee(rtrim((string) config('app.url'), '/').'/hardware/'.$asset->id, false)
+            ->assertSee('View in VDOT');
+    }
+
     private function makePublishedProduct(): array
     {
         $publicField = CustomField::factory()->create([

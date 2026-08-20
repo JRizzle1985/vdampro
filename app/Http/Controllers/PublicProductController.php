@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\CustomField;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,7 +16,7 @@ class PublicProductController extends Controller
             ->with([
                 'company:id,name',
                 'model:id,name,model_number,category_id,manufacturer_id,fieldset_id,image,updated_at',
-                'model.category:id,name',
+                'model.category:id,name,image',
                 'model.manufacturer:id,name',
                 'model.fieldset:id,name',
                 'model.fieldset.fields' => fn ($query) => $query
@@ -71,6 +72,8 @@ class PublicProductController extends Controller
             'sections' => $sections,
             'updatedAt' => collect([$asset->updated_at, $asset->model?->updated_at])->filter()->max(),
             'scanCount' => (int) $asset->scan_count,
+            'brandLogoPath' => $this->brandLogoPath(),
+            'vdotUrl' => rtrim((string) config('app.url'), '/').'/hardware/'.$asset->id,
         ]);
     }
 
@@ -95,6 +98,17 @@ class PublicProductController extends Controller
             return '/uploads/models/'.rawurlencode(basename($asset->model->image));
         }
 
+        if ($asset->model?->category?->image) {
+            return '/uploads/categories/'.rawurlencode(basename($asset->model->category->image));
+        }
+
         return null;
+    }
+
+    private function brandLogoPath(): ?string
+    {
+        $logo = Setting::getSettings()?->logo;
+
+        return $logo ? '/uploads/'.rawurlencode(basename($logo)) : null;
     }
 }

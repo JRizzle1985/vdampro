@@ -80,7 +80,8 @@ class PublicProductTest extends TestCase
         $response = $this->get($this->publicUrl($asset->asset_tag));
 
         $response->assertOk();
-        $this->assertFalse($response->headers->has('Set-Cookie'));
+        $response->assertCookieMissing(config('session.cookie'));
+        $response->assertCookieMissing('XSRF-TOKEN');
         $response->assertHeader('Referrer-Policy', 'no-referrer');
     }
 

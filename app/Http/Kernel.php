@@ -18,6 +18,7 @@ use App\Http\Middleware\PublicProductSecurityHeaders;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetAPIResponseHeaders;
+use App\Http\Middleware\StartSessionUnlessPublicProduct;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -32,7 +33,6 @@ use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Laravel\Passport\Http\Middleware\CreateFreshApiToken;
 
@@ -49,7 +49,7 @@ class Kernel extends HttpKernel
         TrustProxies::class,
         NoSessionStore::class,
         PreventRequestsDuringMaintenance::class,
-        StartSession::class,
+        StartSessionUnlessPublicProduct::class,
         ShareErrorsFromSession::class,
         CheckForSetup::class,
         CheckForDebug::class,

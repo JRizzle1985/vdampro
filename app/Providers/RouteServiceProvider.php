@@ -103,5 +103,9 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(config('auth.password_reset.max_attempts_per_min'))->by(optional($request->user())->id ?: $request->ip());
         });
 
+        RateLimiter::for('public-products', function (Request $request) {
+            return Limit::perMinute(60)->by($request->ip());
+        });
+
     }
 }

@@ -60,6 +60,10 @@ return [
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
     'display_audit' => 'Display in audit forms',
+    'display_public' => 'Allow this field on published public product pages',
+    'display_public_help' => 'Off by default. The value is only public when this field and the individual asset are both published. Encrypted fields can never be public.',
+    'public_section' => 'Public page section',
+    'public_order' => 'Display order',
     'types' => [
         'text' => 'Text Box',
         'listbox' => 'List Box',

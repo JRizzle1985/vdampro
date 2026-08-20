@@ -51,6 +51,9 @@ class CustomFieldRequest extends FormRequest
         }
 
         $rules['custom_format'] = 'valid_regex';
+        $rules['display_public'] = 'nullable|boolean';
+        $rules['public_section'] = 'nullable|required_if:display_public,1|in:overview,ingredients,allergens,nutrition,usage,traceability,certifications,packaging,company';
+        $rules['public_order'] = 'nullable|integer|min:0|max:65535';
 
         return $rules;
     }

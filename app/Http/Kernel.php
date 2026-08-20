@@ -14,6 +14,7 @@ use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\LogAuthedUserHeader;
 use App\Http\Middleware\NoSessionStore;
 use App\Http\Middleware\PreventBackHistory;
+use App\Http\Middleware\PublicProductSecurityHeaders;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetAPIResponseHeaders;
@@ -108,5 +109,6 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'api-throttle' => SetAPIResponseHeaders::class,
         'health' => null,
+        'public-product-headers' => PublicProductSecurityHeaders::class,
     ];
 }

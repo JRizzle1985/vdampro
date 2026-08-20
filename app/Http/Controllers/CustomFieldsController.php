@@ -93,11 +93,13 @@ class CustomFieldsController extends Controller
 
         $show_in_email = $request->input('show_in_email', 0);
         $display_in_user_view = $request->input('display_in_user_view', 0);
+        $display_public = $request->boolean('display_public') && ! $request->boolean('field_encrypted');
 
         // Override the display settings if the field is encrypted
         if ($request->input('field_encrypted') == '1') {
             $show_in_email = '0';
             $display_in_user_view = '0';
+            $display_public = false;
         }
 
         $field = new CustomField([
@@ -116,6 +118,9 @@ class CustomFieldsController extends Controller
             'display_checkout' => $request->input('display_checkout', 0),
             'display_audit' => $request->input('display_audit', 0),
             'created_by' => auth()->id(),
+            'display_public' => $display_public,
+            'public_section' => $display_public ? $request->input('public_section', 'overview') : null,
+            'public_order' => $display_public ? $request->integer('public_order', 0) : 0,
         ]);
 
         if ($request->filled('custom_format')) {
@@ -236,11 +241,13 @@ class CustomFieldsController extends Controller
         $this->authorize('update', CustomField::class);
         $show_in_email = $request->input('show_in_email', 0);
         $display_in_user_view = $request->input('display_in_user_view', 0);
+        $display_public = $request->boolean('display_public') && ! (bool) $field->field_encrypted;
 
         // Override the display settings if the field is encrypted
         if ($request->input('field_encrypted') == '1') {
             $show_in_email = '0';
             $display_in_user_view = '0';
+            $display_public = false;
         }
 
         $field->name = trim($request->input('name'));
@@ -257,6 +264,9 @@ class CustomFieldsController extends Controller
         $field->display_checkin = $request->input('display_checkin', 0);
         $field->display_checkout = $request->input('display_checkout', 0);
         $field->display_audit = $request->input('display_audit', 0);
+        $field->display_public = $display_public;
+        $field->public_section = $display_public ? $request->input('public_section', 'overview') : null;
+        $field->public_order = $display_public ? $request->integer('public_order', 0) : 0;
 
         if ($request->input('format') == 'CUSTOM REGEX') {
             $field->format = $request->input('custom_format');

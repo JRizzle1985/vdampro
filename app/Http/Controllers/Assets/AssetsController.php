@@ -172,6 +172,8 @@ class AssetsController extends Controller
                 $asset->requestable = request('requestable', 0);
                 $asset->rtd_location_id = request('rtd_location_id', null);
                 $asset->byod = request('byod', 0);
+                $asset->public_product_enabled = $request->boolean('public_product_enabled');
+                $asset->public_product_published_at = $asset->public_product_enabled ? now() : null;
 
                 if (! empty($settings->audit_interval)) {
                     $asset->next_audit_date = Carbon::now()->addMonths((int) $settings->audit_interval)->toDateString();
@@ -426,6 +428,13 @@ class AssetsController extends Controller
         $asset->requestable = $request->input('requestable', 0);
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
+        $wasPublic = (bool) $asset->public_product_enabled;
+        $asset->public_product_enabled = $request->boolean('public_product_enabled');
+        if ($asset->public_product_enabled && ! $wasPublic) {
+            $asset->public_product_published_at = now();
+        } elseif (! $asset->public_product_enabled) {
+            $asset->public_product_published_at = null;
+        }
 
         $status = Statuslabel::find($request->input('status_id'));
 

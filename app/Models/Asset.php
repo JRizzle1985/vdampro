@@ -106,6 +106,8 @@ class Asset extends Depreciable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'public_product_enabled' => 'boolean',
+        'public_product_published_at' => 'datetime',
     ];
 
     protected $rules = [
@@ -129,6 +131,7 @@ class Asset extends Depreciable
         'asset_eol_date' => ['nullable', 'date'],
         'eol_explicit' => ['nullable', 'boolean'],
         'byod' => ['nullable', 'boolean'],
+        'public_product_enabled' => ['nullable', 'boolean'],
         'order_number' => ['nullable', 'string', 'max:191'],
         'notes' => ['nullable', 'string', 'max:65535'],
         'assigned_to' => ['nullable', 'integer', 'required_with:assigned_type'],
@@ -168,6 +171,8 @@ class Asset extends Depreciable
         'byod',
         'asset_eol_date',
         'eol_explicit',
+        'public_product_enabled',
+        'public_product_published_at',
         'last_audit_date',
         'next_audit_date',
         'last_checkin',

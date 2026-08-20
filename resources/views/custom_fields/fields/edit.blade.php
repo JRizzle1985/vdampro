@@ -215,6 +215,32 @@
               </div>
               @endif
 
+              <!-- Public product information -->
+              <div class="col-md-9 col-md-offset-3" id="display_public" style="padding-bottom: 10px;">
+                  <label class="form-control">
+                      <input type="checkbox" name="display_public" id="display_public_checkbox" aria-label="display_public" value="1"{{ old('display_public', $field->display_public) ? ' checked="checked"' : '' }}{{ $field->field_encrypted ? ' disabled' : '' }}>
+                      {{ trans('admin/custom_fields/general.display_public') }}
+                  </label>
+                  <p class="help-block">{{ trans('admin/custom_fields/general.display_public_help') }}</p>
+              </div>
+
+              <div id="public_display_options" class="col-md-9 col-md-offset-3" style="padding-bottom: 10px;">
+                  <div class="row">
+                      <div class="col-md-8">
+                          <label for="public_section">{{ trans('admin/custom_fields/general.public_section') }}</label>
+                          <select class="form-control" name="public_section" id="public_section">
+                              @foreach(\App\Models\CustomField::PUBLIC_SECTIONS as $sectionKey => $sectionLabel)
+                                  <option value="{{ $sectionKey }}"{{ old('public_section', $field->public_section ?: 'overview') === $sectionKey ? ' selected' : '' }}>{{ $sectionLabel }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="public_order">{{ trans('admin/custom_fields/general.public_order') }}</label>
+                          <input class="form-control" type="number" min="0" max="65535" name="public_order" id="public_order" value="{{ old('public_order', $field->public_order ?? 0) }}">
+                      </div>
+                  </div>
+              </div>
+
 
              <!-- Show in Checkout Form  -->
              <div class="col-md-9 col-md-offset-3" id="display_checkout" style="padding-bottom: 10px;">
@@ -316,6 +342,14 @@
 @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
     $(document).ready(function(){
+
+        function updatePublicOptions() {
+            var canPublish = $('#display_public_checkbox').is(':checked') && !$('#field_encrypted').is(':checked');
+            $('#public_display_options').toggle(canPublish);
+        }
+
+        $('#display_public_checkbox, #field_encrypted').on('change', updatePublicOptions);
+        updatePublicOptions();
 
         $("#checkAll").change(function () {
             $(".fieldset").prop('checked', $(this).prop("checked"));

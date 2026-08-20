@@ -652,6 +652,8 @@ class AssetsController extends Controller
 
         $asset->fill($request->validated());
         $asset->created_by = auth()->id();
+        $asset->public_product_enabled = $request->boolean('public_product_enabled');
+        $asset->public_product_published_at = $asset->public_product_enabled ? now() : null;
 
         /**
          * this is here just legacy reasons. Api\AssetController
@@ -740,7 +742,15 @@ class AssetsController extends Controller
      */
     public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
+        $wasPublic = (bool) $asset->public_product_enabled;
         $asset->fill($request->validated());
+        if ($request->has('public_product_enabled')) {
+            if ($asset->public_product_enabled && ! $wasPublic) {
+                $asset->public_product_published_at = now();
+            } elseif (! $asset->public_product_enabled) {
+                $asset->public_product_published_at = null;
+            }
+        }
 
         if ($request->has('model_id')) {
             $asset->model()->associate(AssetModel::find($request->validated()['model_id']));

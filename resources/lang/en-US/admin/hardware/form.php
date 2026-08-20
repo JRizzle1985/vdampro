@@ -61,6 +61,8 @@ return [
     'asset_deployable' => '{1} This asset can be checked out.|[2,*] These assets can be checked out.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'processing' => 'Processing... ',
+    'public_product' => 'Publish this asset on the public product-information site',
+    'public_product_help' => 'Off by default. Only custom fields explicitly marked public are disclosed. Uncheck to remove public access immediately.',
     'optional_infos' => 'Optional Information',
     'order_details' => 'Order Related Information',
     'calc_eol' => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

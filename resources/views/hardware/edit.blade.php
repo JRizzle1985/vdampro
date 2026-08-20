@@ -109,6 +109,21 @@
     @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id', 'help_text' => trans('general.rtd_location_help')])
     @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
+    <div class="form-group">
+        <div class="col-md-7 col-md-offset-3">
+            <label class="form-control" for="public_product_enabled">
+                <input type="checkbox" value="1" name="public_product_enabled" id="public_product_enabled" {{ old('public_product_enabled', $item->public_product_enabled) == '1' ? ' checked="checked"' : '' }}>
+                {{ trans('admin/hardware/form.public_product') }}
+            </label>
+            <p class="help-block">
+                {{ trans('admin/hardware/form.public_product_help') }}
+                @if($item->id && $item->public_product_enabled)
+                    <a href="https://{{ config('app.public_product_host') }}/{{ rawurlencode($item->asset_tag) }}" target="_blank" rel="noopener noreferrer">Preview public page</a>
+                @endif
+            </p>
+        </div>
+    </div>
+
 
 
     @include ('partials.forms.edit.image-upload', ['image_path' => app('assets_upload_path')])

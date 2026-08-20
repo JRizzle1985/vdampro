@@ -150,6 +150,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'public_product_host' => env('PUBLIC_PRODUCT_HOST', 'product.ocmo.co.za'),
 
     /*
     |--------------------------------------------------------------------------

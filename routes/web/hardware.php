@@ -195,3 +195,11 @@ Route::resource('maintenances',
 
 Route::get('ht/{tag}', [App\Http\Controllers\PublicAssetController::class, 'show'])->name('ht/assetTag');
 Route::get('public/asset/{tag}/leaflet/{file_id}', [App\Http\Controllers\PublicAssetController::class, 'downloadLeaflet'])->name('public.asset.leaflet');
+
+Route::domain(config('app.public_product_host'))
+    ->middleware(['throttle:public-products', 'public-product-headers'])
+    ->group(function () {
+        Route::get('{tag}', [App\Http\Controllers\PublicProductController::class, 'show'])
+            ->where('tag', '[A-Za-z0-9][A-Za-z0-9._-]{0,127}')
+            ->name('public.product.show');
+    });

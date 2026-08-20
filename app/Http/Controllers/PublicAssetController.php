@@ -62,6 +62,10 @@ class PublicAssetController extends Controller
         // Traverse fieldsets dynamically
         if ($asset->model->fieldset) {
             foreach ($asset->model->fieldset->fields as $field) {
+                if (! $asset->public_product_enabled || ! $field->display_public || $field->field_encrypted) {
+                    continue;
+                }
+
                 $name = strtolower($field->name);
                 $val = $asset->{$field->db_column_name()};
 
@@ -107,6 +111,8 @@ class PublicAssetController extends Controller
             $image_url = asset('uploads/models/' . $asset->model->image);
         }
 
+        $signedIn = auth()->check();
+
         return view('public/verify', compact(
             'asset',
             'manufacturer_address',
@@ -116,7 +122,8 @@ class PublicAssetController extends Controller
             'license_number',
             'custom_fields',
             'leaflet',
-            'image_url'
+            'image_url',
+            'signedIn'
         ));
     }
 

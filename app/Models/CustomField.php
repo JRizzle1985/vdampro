@@ -13,6 +13,18 @@ use Watson\Validating\ValidatingTrait;
 
 class CustomField extends Model
 {
+    public const PUBLIC_SECTIONS = [
+        'overview' => 'Product overview',
+        'ingredients' => 'Ingredients or composition',
+        'allergens' => 'Allergens and warnings',
+        'nutrition' => 'Nutrition or dosage',
+        'usage' => 'Usage and storage',
+        'traceability' => 'Batch and traceability',
+        'certifications' => 'Certifications',
+        'packaging' => 'Packaging and recycling',
+        'company' => 'Company information',
+    ];
+
     use HasFactory;
     use UniqueUndeletedTrait,
         ValidatingTrait;
@@ -56,6 +68,9 @@ class CustomField extends Model
         'auto_add_to_fieldsets' => 'boolean',
         'show_in_listview' => 'boolean',
         'show_in_requestable_list' => 'boolean',
+        'display_public' => 'boolean',
+        'public_section' => 'nullable|in:overview,ingredients,allergens,nutrition,usage,traceability,certifications,packaging,company',
+        'public_order' => 'nullable|integer|min:0|max:65535',
         'show_in_email' => 'boolean',
         'format' => 'nullable|string|max:191',
     ];
@@ -86,6 +101,9 @@ class CustomField extends Model
         'display_checkin',
         'display_audit',
         'show_in_requestable_list',
+        'display_public',
+        'public_section',
+        'public_order',
     ];
 
     /**
@@ -158,6 +176,24 @@ class CustomField extends Model
     public static function boot()
     {
         parent::boot();
+        self::saving(function ($custom_field) {
+            if (! Schema::hasColumns('custom_fields', ['display_public', 'public_section', 'public_order'])) {
+                return;
+            }
+
+            // Encrypted values are never eligible for public disclosure, even if
+            // an API client or stale form submits conflicting visibility flags.
+            if ((bool) $custom_field->field_encrypted) {
+                $custom_field->display_public = false;
+                $custom_field->public_section = null;
+                $custom_field->public_order = 0;
+            } elseif (! (bool) $custom_field->display_public) {
+                $custom_field->public_section = null;
+                $custom_field->public_order = 0;
+            } elseif (! array_key_exists($custom_field->public_section, self::PUBLIC_SECTIONS)) {
+                $custom_field->public_section = 'overview';
+            }
+        });
         self::created(
             function ($custom_field) {
 

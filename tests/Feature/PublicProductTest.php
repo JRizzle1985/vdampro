@@ -73,6 +73,17 @@ class PublicProductTest extends TestCase
         ]);
     }
 
+    public function test_public_page_does_not_issue_session_or_csrf_cookies(): void
+    {
+        [$asset] = $this->makePublishedProduct();
+
+        $response = $this->get($this->publicUrl($asset->asset_tag));
+
+        $response->assertOk();
+        $this->assertFalse($response->headers->has('Set-Cookie'));
+        $response->assertHeader('Referrer-Policy', 'no-referrer');
+    }
+
     private function makePublishedProduct(): array
     {
         $publicField = CustomField::factory()->create([

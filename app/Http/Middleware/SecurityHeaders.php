@@ -98,6 +98,15 @@ class SecurityHeaders
             $response->headers->set('Content-Security-Policy', $csp_policy);
         }
 
+        // Public product pages are deliberately stateless. The global Snipe-IT
+        // stack starts a session for every request, so strip its cookies and
+        // retain the stricter referrer policy applied by the product middleware.
+        if ($request->getHost() === config('app.public_product_host')) {
+            $response->headers->remove('Set-Cookie');
+            $response->headers->remove('Feature-Policy');
+            $response->headers->set('Referrer-Policy', 'no-referrer');
+        }
+
         return $response;
     }
 

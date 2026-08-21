@@ -590,6 +590,12 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
     // 2026-08-21-radareye-enrollment-ticket-issuance-design.md.
     Route::post('/hardware/{asset}/radareye-enrollment-ticket', [Api\AssetsController::class, 'issueRadarEyeEnrollmentTicket'])->name('api.assets.radareye-enrollment-ticket');
 
+    // RadarEye read-only asset summary: who this asset is assigned to, its status,
+    // location, and notes, for RadarEye's device page. Gated on Gate::allows('view', $asset)
+    // (not 'update' -- this is read-only). See docs/superpowers/specs/
+    // 2026-08-21-radareye-enrollment-ticket-issuance-design.md.
+    Route::get('/hardware/{asset}/radareye-summary', [Api\AssetsController::class, 'radarEyeAssetSummary'])->name('api.assets.radareye-summary');
+
     Route::resource('hardware',
         Api\AssetsController::class,
         ['names' => [

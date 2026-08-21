@@ -895,6 +895,40 @@ class AssetsController extends Controller
     }
 
     /**
+     * Read-only summary of a VDOT asset, for RadarEye's device page to
+     * display who an asset is assigned to, its status, location, and
+     * notes, plus a link back into VDOT.
+     *
+     * Authorization deliberately uses the `view` gate -- not `update`
+     * like the ticket-issuance route above -- because this is read-only
+     * and does not let the caller change anything. See docs/superpowers/
+     * specs/2026-08-21-radareye-enrollment-ticket-issuance-design.md.
+     *
+     * Deliberately excludes company_id, purchase cost, encrypted custom
+     * fields, and serial number -- this is a minimal, narrow response
+     * shape that RadarEye's client depends on field-for-field.
+     */
+    public function radarEyeAssetSummary(Asset $asset): JsonResponse
+    {
+        $this->authorize('view', $asset);
+
+        $transformer = new AssetsTransformer;
+        $assignedTo = $transformer->transformAssignedTo($asset);
+
+        return response()->json([
+            'asset_tag' => (string) $asset->asset_tag,
+            'assigned_to' => $assignedTo ? [
+                'type' => $assignedTo['type'],
+                'name' => $assignedTo['name'],
+            ] : null,
+            'status_label' => $asset->status ? $asset->status->name : null,
+            'location' => $asset->location ? $asset->location->name : null,
+            'notes' => $asset->notes !== null && $asset->notes !== '' ? $asset->notes : null,
+            'vdot_url' => route('hardware.show', $asset->id),
+        ]);
+    }
+
+    /**
      * Delete a given asset (mark as deleted).
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

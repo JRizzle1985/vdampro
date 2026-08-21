@@ -120,3 +120,81 @@ see the session hand-off for the open question.
 - Any new custom permission or role.
 - Verifying/redeeming tickets in PHP — that is RadarEye's job
   (`shared/vdot_enrollment/tickets.py::verify_ticket`), not VDOT's.
+
+## Read-only asset summary (2026-08-21)
+
+**Branch:** `feat/radareye-asset-summary`, stacked on this branch's
+work above (`master` already has the ticket-issuance route).
+
+RadarEye's device page shows a small read-only panel — who a VDOT
+asset is assigned to, its status, location, notes, and a "View in
+VDOT" link. RadarEye's side (`GET /devices/{device_id}/vdot-summary`,
+`require_admin`, in-process 60s cache, degrades to
+`{"available": false, "reason": "..."}` rather than 500ing) is already
+described in the RadarEye repo's
+`docs/superpowers/specs/2026-08-18-vdot-opt-in-enrollment-design.md`
+under its own "## Read-only asset summary" section — that document is
+canonical for RadarEye's caching/degradation behavior and is not
+re-derived here.
+
+This section covers only the VDOT side that RadarEye's server calls.
+
+### Endpoint and gate
+
+`GET /api/v1/hardware/{asset}/radareye-summary`
+(`Api\AssetsController::radarEyeAssetSummary`, registered in
+`routes/api.php` immediately after the enrollment-ticket route).
+
+Authorized with `$this->authorize('view', $asset)` — i.e.
+`Gate::allows('view', $asset)` →
+`AssetPolicy` (inherits `SnipePermissionsPolicy::view()`) →
+`$user->hasAccess('assets.view')`. This is deliberately **not** the
+`update`/`assets.edit` gate used by the ticket-issuance route above:
+this endpoint changes nothing, so it only requires read access to the
+asset. Same Bearer/Passport auth as every other `/api/v1` route — no
+new permission or role.
+
+### Response shape
+
+```json
+{
+  "asset_tag": "TEST",
+  "assigned_to": {"type": "user", "name": "Jane Doe"},
+  "status_label": "Deployed",
+  "location": "Warehouse A",
+  "notes": "some notes",
+  "vdot_url": "https://<this-instance>/hardware/1250"
+}
+```
+
+- `assigned_to`: reuses `AssetsTransformer::transformAssignedTo()` —
+  the same checkout-target resolution already used by the existing
+  asset show/index API response — rather than re-deriving
+  user-vs-location-vs-asset checkout logic. Only the `type` and `name`
+  keys are surfaced here (the transformer's fuller user-checkout shape
+  includes id/username/email/etc., which are deliberately dropped for
+  this minimal response). `null` when the asset is unassigned.
+- `status_label`: `$asset->status->name`, `null` if no status set.
+- `location`: `$asset->location->name` — the asset's own `location`
+  relationship, independent of `assigned_to`. An asset can have a
+  location set even when checked out to a user (whose own location may
+  differ); this field always reflects the asset's own location record,
+  not the assignee's. `null` if none.
+- `notes`: `$asset->notes`, coerced to `null` when empty/blank rather
+  than returned as `""`.
+- `vdot_url`: `route('hardware.show', $asset->id)`, which resolves
+  against `config('app.url')` (Laravel's standard route URL
+  generation) — not hardcoded to any one domain, so this is correct
+  across every domain this codebase deploys to (CoEx, Conclude,
+  CannaAfrica, etc.) without per-instance code changes.
+
+Deliberately excluded: `company_id`, purchase cost, encrypted custom
+fields, serial number — anything not in the shape above.
+
+### Tests
+
+`tests/Feature/Assets/Api/RadarEyeAssetSummaryTest.php`, mirroring
+`RadarEyeEnrollmentTicketTest.php`'s style: gate denial (403 without
+`assets.view`), full-shape assertion on a user-checkout asset, the
+unassigned/null `assigned_to` case, and an empty-`notes` case
+confirming it comes back `null` rather than `""`.

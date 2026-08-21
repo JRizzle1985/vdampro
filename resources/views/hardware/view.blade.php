@@ -7,14 +7,6 @@
 @stop
 
 @section('header_right')
-    @if (config('services.radareye.enroll_url') && config('services.radareye.hmac_key') && Auth::user()?->can('update', $asset))
-        <form method="POST" action="{{ route('hardware.radareye-enroll', $asset) }}" class="inline">
-            @csrf
-            <button type="submit" class="btn btn-default">
-                Enroll in RadarEye
-            </button>
-        </form>
-    @endif
     <x-button.info-panel-toggle/>
 @endsection
 

@@ -73,10 +73,6 @@ Route::group(
             [AssetsController::class, 'auditStore']
         )->name('asset.audit.store');
 
-        Route::post('{asset}/radareye-enroll',
-            [\App\Http\Controllers\Assets\RadarEyeEnrollmentController::class, 'store']
-        )->name('hardware.radareye-enroll');
-
         Route::get('history', [AssetsController::class, 'getImportHistory'])
             ->name('asset.import-history')
             ->breadcrumbs(fn (Trail $trail) =>

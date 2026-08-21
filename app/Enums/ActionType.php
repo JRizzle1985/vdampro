@@ -33,4 +33,7 @@ enum ActionType: string
     // File Uploads
     case Uploaded = 'uploaded';
     case UploadDeleted = 'upload deleted';
+
+    // RadarEye enrollment
+    case RadareyeEnrollmentIssued = 'radareye enrollment issued';
 }

@@ -584,6 +584,12 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
     Route::patch('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.update');
     Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
 
+    // RadarEye opt-in enrollment: issue a one-time signed ticket for this asset.
+    // Authorized identically to the update route above (same Gate::allows('update', $asset) check) --
+    // whoever can edit the asset can issue the ticket. See docs/superpowers/specs/
+    // 2026-08-21-radareye-enrollment-ticket-issuance-design.md.
+    Route::post('/hardware/{asset}/radareye-enrollment-ticket', [Api\AssetsController::class, 'issueRadarEyeEnrollmentTicket'])->name('api.assets.radareye-enrollment-ticket');
+
     Route::resource('hardware',
         Api\AssetsController::class,
         ['names' => [

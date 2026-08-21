@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -28,6 +29,7 @@ use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
 use App\Observers\AssetObserver;
+use App\Services\RadarEye\EnrollmentTicketService;
 use App\View\Label;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -836,6 +838,60 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
+    }
+
+    /**
+     * Issue a one-time, short-lived signed ticket that a RadarEye admin can
+     * redeem to bind a physical tracker to this asset.
+     *
+     * Authorization deliberately reuses the same `update` gate as the
+     * PATCH/PUT hardware update routes -- whoever can edit this asset can
+     * issue a ticket for it. This is intentional dual control: a VDOT
+     * asset-editor issues, a RadarEye admin redeems, on two different
+     * systems with two different credentials. No new permission is
+     * introduced. See docs/superpowers/specs/
+     * 2026-08-21-radareye-enrollment-ticket-issuance-design.md.
+     *
+     * The ticket itself is a 15-minute bearer credential and is
+     * deliberately never written to logs -- only the action log entry
+     * below records that a ticket was issued, not its contents.
+     */
+    public function issueRadarEyeEnrollmentTicket(Asset $asset): JsonResponse
+    {
+        $this->authorize('update', $asset);
+
+        if (empty($asset->company_id)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Assign this asset to a company before issuing a RadarEye enrollment ticket.'), 200);
+        }
+
+        $ticketService = new EnrollmentTicketService(
+            config('radareye.enroll_hmac_key'),
+            (int) config('radareye.enroll_ticket_ttl', 900)
+        );
+
+        if (! $ticketService->isConfigured()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'RadarEye enrollment is not configured on this VDOT instance.'), 200);
+        }
+
+        $result = $ticketService->issue(
+            (string) $asset->id,
+            (string) $asset->asset_tag,
+            (string) $asset->company_id,
+            (string) auth()->id(),
+        );
+
+        $log = new Actionlog;
+        $log->item_id = $asset->id;
+        $log->item_type = Asset::class;
+        $log->created_by = auth()->id();
+        // Deliberately no ticket/nonce/secret in the note -- it is a bearer credential.
+        $log->note = 'RadarEye enrollment ticket issued for asset '.$asset->asset_tag;
+        $log->logaction(ActionType::RadareyeEnrollmentIssued);
+
+        return response()->json([
+            'ticket' => $result['ticket'],
+            'expires_at' => $result['expires_at'],
+        ]);
     }
 
     /**

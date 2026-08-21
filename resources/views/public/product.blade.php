@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light"><meta name="theme-color" content="#173bd4">
     <meta name="description" content="Verified product information for {{ $productName }}.">
     <title>{{ $productName }} — Verified product record</title>
-    <link rel="stylesheet" href="/css/public-product.css">
+    <link rel="stylesheet" href="/css/public-product.css?v=20260821-2">
 </head>
 <body>
 <!--

@@ -41,7 +41,7 @@ class RadarEyeAssetSummaryTest extends TestCase
             ->assertOk()
             ->json();
 
-        $this->assertSame($asset->asset_tag, $response['asset_tag']);
+        $this->assertSame((string) $asset->asset_tag, $response['asset_tag']);
         $this->assertSame('user', $response['assigned_to']['type']);
         $this->assertSame($assignee->display_name, $response['assigned_to']['name']);
         $this->assertSame('Deployed', $response['status_label']);

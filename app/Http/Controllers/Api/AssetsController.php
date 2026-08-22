@@ -912,6 +912,12 @@ class AssetsController extends Controller
     {
         $this->authorize('view', $asset);
 
+        // transformAssignedTo() reads $asset->assigned, which the assignedTo()
+        // morphTo relation only populates via eager loading -- it does not
+        // lazy-resolve on a freshly route-bound model. Confirmed empirically:
+        // without this, assigned_to always comes back null.
+        $asset->loadMissing('assignedTo');
+
         $transformer = new AssetsTransformer;
         $assignedTo = $transformer->transformAssignedTo($asset);
 
